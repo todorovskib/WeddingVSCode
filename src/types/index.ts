@@ -110,3 +110,45 @@ export interface GuestStats {
   declinedCount: number;
   pendingCount: number;
 }
+
+export interface BudgetItem {
+  id: number;
+  weddingId: number;
+  category?: string;
+  description?: string;
+  budgetedAmount?: number;
+  actualAmount?: number;
+  status?: string;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+export interface FaqItem {
+  id: number;
+  weddingId: number;
+  question: string;
+  answer: string;
+  category?: string;
+  orderIndex?: number;
+  createdAt?: string;
+}
+
+export interface GalleryItem {
+  id: number;
+  weddingId: number;
+  imageUrl: string;
+  caption?: string;
+  category?: string;
+  uploadedAt?: string;
+}
+
+export interface RegistryItem {
+  id: number;
+  weddingId: number;
+  productId?: number;
+  quantityNeeded?: number;
+  quantityReceived?: number;
+  giftUrl?: string;
+  notes?: string;
+  createdAt?: string;
+}

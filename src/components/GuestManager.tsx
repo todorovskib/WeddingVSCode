@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { guestService } from '../services/api';
 import { Guest } from '../types';
 
@@ -11,31 +11,41 @@ export const GuestManager: React.FC<{ weddingId: number }> = ({ weddingId }) => 
     relationship: '',
     dietaryRequirements: '',
     address: '',
-    notes: ''
+    notes: '',
   });
   const [loading, setLoading] = useState(false);
+  const [fetching, setFetching] = useState(false);
+  const [error, setError] = useState('');
 
   useEffect(() => {
-    fetchGuests();
+    if (weddingId > 0) {
+      void fetchGuests();
+    }
   }, [weddingId]);
 
   const fetchGuests = async () => {
+    setFetching(true);
+    setError('');
     try {
       const data = await guestService.getWeddingGuests(weddingId);
       setGuests(data.guests || []);
     } catch (err) {
       console.error('Failed to fetch guests:', err);
+      setError('Failed to load guest list');
+    } finally {
+      setFetching(false);
     }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleAddGuest = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    setError('');
     try {
       await guestService.add({ weddingId, ...formData });
       setFormData({
@@ -45,154 +55,118 @@ export const GuestManager: React.FC<{ weddingId: number }> = ({ weddingId }) => 
         relationship: '',
         dietaryRequirements: '',
         address: '',
-        notes: ''
+        notes: '',
       });
-      fetchGuests();
+      await fetchGuests();
     } catch (err) {
       console.error('Failed to add guest:', err);
+      setError('Failed to add guest');
     } finally {
       setLoading(false);
     }
   };
 
-  const handleUpdateRsvp = async (id: number, status: string, count: number) => {
+  const handleUpdateRsvp = async (id: number, status: 'confirmed' | 'pending' | 'declined') => {
     try {
-      await guestService.updateRsvp(id, status, count);
-      fetchGuests();
+      await guestService.updateRsvp(id, status, status === 'declined' ? 0 : 1);
+      await fetchGuests();
     } catch (err) {
       console.error('Failed to update RSVP:', err);
+      setError('Failed to update RSVP');
     }
   };
 
   const handleDeleteGuest = async (id: number) => {
-    if (confirm('Are you sure you want to delete this guest?')) {
-      try {
-        await guestService.delete(id);
-        fetchGuests();
-      } catch (err) {
-        console.error('Failed to delete guest:', err);
-      }
+    if (!window.confirm('Delete this guest?')) return;
+    try {
+      await guestService.delete(id);
+      await fetchGuests();
+    } catch (err) {
+      console.error('Failed to delete guest:', err);
+      setError('Failed to delete guest');
     }
   };
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow">
-      <h3 className="text-xl font-bold mb-4">Guest Manager</h3>
-
-      <form onSubmit={handleAddGuest} className="mb-6 space-y-3">
-        <div className="grid grid-cols-2 gap-3">
-          <input
-            type="text"
-            name="name"
-            placeholder="Guest Name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-            className="px-3 py-2 border rounded"
-          />
-          <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            value={formData.email}
-            onChange={handleChange}
-            className="px-3 py-2 border rounded"
-          />
+    <div className="space-y-5">
+      <section className="card-surface p-5">
+        <div className="mb-4">
+          <h3 className="text-3xl font-semibold text-stone-900">Guest Manager</h3>
+          <p className="text-sm text-stone-600">Add guests, collect details, and track RSVPs.</p>
         </div>
 
-        <div className="grid grid-cols-2 gap-3">
-          <input
-            type="tel"
-            name="phone"
-            placeholder="Phone"
-            value={formData.phone}
-            onChange={handleChange}
-            className="px-3 py-2 border rounded"
-          />
-          <input
-            type="text"
-            name="relationship"
-            placeholder="Relationship"
-            value={formData.relationship}
-            onChange={handleChange}
-            className="px-3 py-2 border rounded"
-          />
+        {error && <div className="mb-4 rounded-xl border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">{error}</div>}
+
+        <form onSubmit={handleAddGuest} className="space-y-3">
+          <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+            <input type="text" name="name" placeholder="Guest name" value={formData.name} onChange={handleChange} required className="field" />
+            <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} className="field" />
+          </div>
+          <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+            <input type="tel" name="phone" placeholder="Phone" value={formData.phone} onChange={handleChange} className="field" />
+            <input type="text" name="relationship" placeholder="Relationship" value={formData.relationship} onChange={handleChange} className="field" />
+          </div>
+          <input type="text" name="address" placeholder="Address" value={formData.address} onChange={handleChange} className="field" />
+          <textarea name="dietaryRequirements" placeholder="Dietary requirements" value={formData.dietaryRequirements} onChange={handleChange} className="field min-h-[80px]" />
+          <textarea name="notes" placeholder="Notes" value={formData.notes} onChange={handleChange} className="field min-h-[80px]" />
+          <button type="submit" disabled={loading} className="btn-primary w-full">
+            {loading ? 'Adding...' : 'Add Guest'}
+          </button>
+        </form>
+      </section>
+
+      <section className="card-surface p-5">
+        <div className="mb-4 flex items-center justify-between">
+          <h4 className="text-2xl font-semibold text-stone-900">Guest List</h4>
+          <span className="chip">{guests.length} guests</span>
         </div>
-
-        <input
-          type="text"
-          name="address"
-          placeholder="Address"
-          value={formData.address}
-          onChange={handleChange}
-          className="w-full px-3 py-2 border rounded"
-        />
-
-        <textarea
-          name="dietaryRequirements"
-          placeholder="Dietary Requirements"
-          value={formData.dietaryRequirements}
-          onChange={handleChange}
-          className="w-full px-3 py-2 border rounded"
-          rows={2}
-        />
-
-        <button
-          type="submit"
-          disabled={loading}
-          className="w-full bg-blue-600 text-white py-2 rounded font-medium hover:bg-blue-700 disabled:opacity-50"
-        >
-          {loading ? 'Adding...' : 'Add Guest'}
-        </button>
-      </form>
-
-      <div className="space-y-2">
-        <h4 className="font-semibold mb-3">Guest List ({guests.length})</h4>
-        {guests.length === 0 ? (
-          <p className="text-gray-500">No guests added yet</p>
+        {fetching ? (
+          <p className="text-sm text-stone-600">Loading guests...</p>
+        ) : guests.length === 0 ? (
+          <p className="rounded-xl border border-dashed border-stone-300 p-4 text-sm text-stone-600">No guests added yet.</p>
         ) : (
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm">
-              <thead className="bg-gray-100">
-                <tr>
-                  <th className="text-left p-2">Name</th>
-                  <th className="text-left p-2">Email</th>
-                  <th className="text-left p-2">RSVP</th>
-                  <th className="text-left p-2">Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {guests.map(guest => (
-                  <tr key={guest.id} className="border-b hover:bg-gray-50">
-                    <td className="p-2">{guest.name}</td>
-                    <td className="p-2">{guest.email || '-'}</td>
-                    <td className="p-2">
+          <div className="space-y-3">
+            {guests.map((guest) => (
+              <div key={guest.id} className="rounded-2xl border border-stone-200/80 bg-white/75 p-4">
+                <div className="flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between">
+                  <div>
+                    <p className="text-lg font-semibold text-stone-900">{guest.name}</p>
+                    <p className="text-sm text-stone-600">{guest.email || 'No email'}{guest.phone ? ` | ${guest.phone}` : ''}</p>
+                    <p className="mt-1 text-xs text-stone-500">
+                      {guest.relationship || 'Relationship not set'}
+                      {guest.dietaryRequirements ? ` | Diet: ${guest.dietaryRequirements}` : ''}
+                    </p>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {(['confirmed', 'pending', 'declined'] as const).map((status) => (
                       <button
-                        onClick={() => handleUpdateRsvp(guest.id, 'confirmed', 1)}
-                        className={`text-xs px-2 py-1 rounded ${
-                          guest.rsvpStatus === 'confirmed'
-                            ? 'bg-green-100 text-green-700'
-                            : 'bg-gray-100 text-gray-700'
+                        key={status}
+                        type="button"
+                        onClick={() => handleUpdateRsvp(guest.id, status)}
+                        className={`rounded-full px-3 py-1.5 text-xs font-semibold transition ${
+                          guest.rsvpStatus === status
+                            ? status === 'confirmed'
+                              ? 'bg-emerald-100 text-emerald-700'
+                              : status === 'declined'
+                                ? 'bg-red-100 text-red-700'
+                                : 'bg-stone-200 text-stone-700'
+                            : 'bg-white text-stone-600 ring-1 ring-stone-200 hover:bg-stone-50'
                         }`}
                       >
-                        ✓ Confirmed
+                        {status}
                       </button>
-                    </td>
-                    <td className="p-2">
-                      <button
-                        onClick={() => handleDeleteGuest(guest.id)}
-                        className="text-red-600 text-xs hover:underline"
-                      >
-                        Delete
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+                    ))}
+                    <button type="button" onClick={() => handleDeleteGuest(guest.id)} className="btn-secondary text-red-700">
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         )}
-      </div>
+      </section>
     </div>
   );
 };
+

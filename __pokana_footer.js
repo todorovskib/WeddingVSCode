@@ -1,0 +1,12 @@
+﻿import{j as e,a}from"./app-BSQLZwjl.js";import{C as s}from"./Container-zzhlcJm3.js";import{c as r}from"./createLucideIcon-C70YaRpZ.js";/**
+ * @license lucide-react v0.414.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */const l=r("Facebook",[["path",{d:"M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z",key:"1jg4f8"}]]);/**
+ * @license lucide-react v0.414.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */const t=r("Instagram",[["rect",{width:"20",height:"20",x:"2",y:"2",rx:"5",ry:"5",key:"2e1cvw"}],["path",{d:"M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z",key:"9exkf1"}],["line",{x1:"17.5",x2:"17.51",y1:"6.5",y2:"6.5",key:"r4j83e"}]]),o=()=>e.jsx("div",{className:"w-full bg-cover bg-center lg:h-52 flex items-center",style:{backgroundImage:"url('/banner.webp')"},children:e.jsxs(s,{children:[e.jsxs("div",{className:"flex flex-col lg:flex-row gap-4 items-center justify-between py-4 text-xl","data-aos":"fade-up","data-aos-duration":"2000",children:[e.jsx("img",{src:"pokana-logo-lavander.png",alt:"Logo",className:"w-32 md:w-44 lg:w-52 h-auto"}),e.jsxs("ul",{className:"flex flex-col lg:flex-row lg:space-x-6 text-white",children:[e.jsx("li",{children:e.jsx(a,{href:"/terms-of-use",className:"hover:text-purple-700",children:"Услови за користење"})}),e.jsx("li",{children:e.jsx(a,{href:"/cookie-policy",className:"hover:text-purple-700",children:"Политика за колачиња"})}),e.jsx("li",{children:e.jsx(a,{href:"/privacy-policy",className:"hover:text-purple-700",children:"Политика за приватност"})})]}),e.jsxs("div",{className:"text-white flex",children:[e.jsx("a",{href:"https://www.facebook.com/people/Pokana/61574758391786/#",target:"_blank",rel:"noopener noreferrer",className:"hover:text-purple-700",children:e.jsx(l,{className:"size-8 ml-2"})}),e.jsx("a",{href:"https://www.instagram.com/pokanamk/",target:"_blank",rel:"noopener noreferrer",className:"hover:text-purple-700",children:e.jsx(t,{className:"size-8 ml-2"})})]})]}),e.jsx("div",{className:"text-white text-center py-4",children:e.jsxs("ul",{children:[e.jsx("li",{children:e.jsx("a",{href:"mailto:info@pokana.mk",className:"hover:text-purple-700",children:"info@pokana.mk"})}),e.jsx("li",{children:"Mavalex, Владимир Комаров 10"})]})})]})}),x=o;export{l as F,t as I,x as a};
+

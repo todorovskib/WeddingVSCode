@@ -1,5 +1,5 @@
 import React, { createContext, useState, useContext, ReactNode } from 'react';
-import { User, Wedding } from '../types';
+import { User } from '../types';
 
 interface AuthContextType {
   user: User | null;
@@ -16,7 +16,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const [token, setToken] = useState<string | null>(localStorage.getItem('token'));
 
   const login = async (email: string, password: string) => {
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/login`, {
+    const apiBase = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+    const response = await fetch(`${apiBase}/api/auth/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password })
@@ -31,7 +32,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   };
 
   const signup = async (email: string, password: string, firstName: string, lastName: string) => {
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/signup`, {
+    const apiBase = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+    const response = await fetch(`${apiBase}/api/auth/signup`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password, firstName, lastName })

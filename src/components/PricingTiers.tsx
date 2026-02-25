@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useI18n } from '../context/I18nContext';
 
 interface Tier {
   id: number;
@@ -6,6 +8,9 @@ interface Tier {
   price: number;
   features: string[];
   maxGuests: number;
+  accent: string;
+  previewImage: string;
+  samplePath: string;
 }
 
 const TIERS: Tier[] = [
@@ -14,49 +19,36 @@ const TIERS: Tier[] = [
     name: 'Basic',
     price: 29,
     maxGuests: 50,
-    features: [
-      'Basic website',
-      'Guest list (up to 50)',
-      'RSVP manager',
-      'Basic checklist',
-      'Digital save-the-date'
-    ]
+    accent: 'from-sky-400 to-cyan-500',
+    previewImage: 'https://images.pexels.com/photos/1729797/pexels-photo-1729797.jpeg?auto=compress&cs=tinysrgb&w=900&h=500&fit=crop',
+    samplePath: '/samples/basic',
+    features: ['Wedding website', 'Guest list', 'RSVP manager', 'Checklist', 'Digital save-the-date'],
   },
   {
     id: 2,
     name: 'Pro',
     price: 79,
     maxGuests: 200,
-    features: [
-      'Everything in Basic',
-      'Guest list (up to 200)',
-      'Dietary requirements collection',
-      'Guest address collection',
-      'Timeline management',
-      'Budget tracker',
-      'Gallery'
-    ]
+    accent: 'from-rose-400 to-pink-600',
+    previewImage: 'https://images.pexels.com/photos/1616113/pexels-photo-1616113.jpeg?auto=compress&cs=tinysrgb&w=900&h=500&fit=crop',
+    samplePath: '/samples/pro',
+    features: ['Everything in Basic', 'Timeline', 'Budget tracker', 'Dietary preferences', 'Address collection', 'Gallery'],
   },
   {
     id: 3,
     name: 'Premium',
     price: 199,
     maxGuests: 500,
-    features: [
-      'Everything in Pro',
-      'Unlimited guests',
-      'Seating arrangements',
-      'Gift registry',
-      'Password-protected site',
-      'FAQ section',
-      'Custom domain support',
-      'Priority support'
-    ]
-  }
+    accent: 'from-amber-400 to-orange-600',
+    previewImage: 'https://images.pexels.com/photos/1024993/pexels-photo-1024993.jpeg?auto=compress&cs=tinysrgb&w=900&h=500&fit=crop',
+    samplePath: '/samples/premium',
+    features: ['Everything in Pro', 'Registry', 'FAQ page', 'Private site password', 'Custom domain-ready', 'Priority support'],
+  },
 ];
 
 export const PricingTiers: React.FC<{ onSelectTier?: (tier: Tier) => void }> = ({ onSelectTier }) => {
-  const [selectedTier, setSelectedTier] = useState<number | null>(null);
+  const [selectedTier, setSelectedTier] = useState<number | null>(2);
+  const { t, language } = useI18n();
 
   const handleSelect = (tier: Tier) => {
     setSelectedTier(tier.id);
@@ -64,49 +56,74 @@ export const PricingTiers: React.FC<{ onSelectTier?: (tier: Tier) => void }> = (
   };
 
   return (
-    <div className="space-y-4">
-      <h2 className="text-2xl font-bold text-center mb-8">Choose Your Wedding Website Plan</h2>
+    <div className="space-y-6">
+      <div className="text-center">
+        <p className="text-xs uppercase tracking-[0.22em] text-stone-500">{t('Plans')}</p>
+        <h2 className="mt-2 text-4xl font-semibold text-stone-900">{t('Choose your wedding website plan')}</h2>
+        <p className="mt-2 text-sm text-stone-600">{t('Flexible tiers for intimate ceremonies and large celebrations.')}</p>
+      </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {TIERS.map(tier => (
-          <div
-            key={tier.id}
-            className={`rounded-lg border-2 overflow-hidden transition ${
-              selectedTier === tier.id
-                ? 'border-purple-600 shadow-lg'
-                : 'border-gray-200 hover:border-purple-400'
-            }`}
-          >
-            <div className={`p-6 ${selectedTier === tier.id ? 'bg-purple-50' : 'bg-white'}`}>
-              <h3 className="text-xl font-bold mb-2">{tier.name}</h3>
-              <div className="text-3xl font-bold text-purple-600 mb-1">${tier.price}</div>
-              <p className="text-sm text-gray-600 mb-4">per wedding</p>
+      <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
+        {TIERS.map((tier) => {
+          const selected = selectedTier === tier.id;
+          const featured = tier.name === 'Pro';
+          return (
+            <article
+              key={tier.id}
+              className={`relative overflow-hidden rounded-2xl border p-5 transition ${
+                selected
+                  ? 'border-rose-300 bg-white shadow-xl'
+                  : 'border-stone-200/80 bg-white/85 shadow-sm hover:-translate-y-0.5 hover:shadow-lg'
+              } ${featured ? 'md:-mt-2 md:mb-2' : ''}`}
+            >
+              <div className="relative mb-4 overflow-hidden rounded-xl">
+                <img
+                  src={tier.previewImage}
+                  alt={`${tier.name} sample preview`}
+                  className="h-28 w-full object-cover transition duration-500 hover:scale-105"
+                />
+                <div className={`absolute inset-0 bg-gradient-to-r ${tier.accent} opacity-30`} />
+                <div className="absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-black/40 to-transparent" />
+              </div>
+
+              {featured && (
+                <span className="absolute right-4 top-4 rounded-full bg-rose-100 px-2 py-1 text-xs font-semibold text-rose-700">
+                  {t('Most Popular')}
+                </span>
+              )}
+
+              <h3 className="text-3xl font-semibold text-stone-900">{t(tier.name)}</h3>
+              <p className="mt-3 flex items-baseline gap-1">
+                <span className="text-3xl font-bold text-stone-900">${tier.price}</span>
+                <span className="text-sm text-stone-500">{t('per wedding')}</span>
+              </p>
+              <p className="mt-1 text-sm text-stone-600">
+                {language === 'mk' ? `До ${tier.maxGuests} гости` : `Up to ${tier.maxGuests} guests`}
+              </p>
 
               <button
+                type="button"
                 onClick={() => handleSelect(tier)}
-                className={`w-full py-2 rounded font-medium mb-4 ${
-                  selectedTier === tier.id
-                    ? 'bg-purple-600 text-white'
-                    : 'bg-gray-200 text-gray-800 hover:bg-gray-300'
-                }`}
+                className={`mt-4 w-full ${selected ? 'btn-primary' : 'btn-secondary'}`}
               >
-                {selectedTier === tier.id ? '✓ Selected' : 'Select Plan'}
+                {selected ? t('Selected Plan') : t('Select Plan')}
               </button>
 
-              <div className="space-y-2">
-                <p className="text-sm font-semibold text-gray-700">Guests: Up to {tier.maxGuests}</p>
-                <ul className="space-y-2">
-                  {tier.features.map((feature, idx) => (
-                    <li key={idx} className="text-sm flex items-start">
-                      <span className="text-green-600 mr-2">✓</span>
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </div>
-        ))}
+              <Link to={tier.samplePath} className="btn-ghost mt-2 w-full justify-center text-rose-700">
+                {t('View Sample Website')}
+              </Link>
+
+              <ul className="mt-5 space-y-2 text-sm text-stone-700">
+                {tier.features.map((feature) => (
+                  <li key={feature} className="flex items-start gap-2">
+                    <span className="mt-1 h-1.5 w-1.5 rounded-full bg-emerald-600" />
+                    <span>{t(feature)}</span>
+                  </li>
+                ))}
+              </ul>
+            </article>
+          );
+        })}
       </div>
     </div>
   );

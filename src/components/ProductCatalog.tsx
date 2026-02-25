@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { productService } from '../services/api';
 import { Product } from '../types';
 
@@ -6,6 +6,7 @@ export const ProductCatalog: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>('');
+  const [query, setQuery] = useState('');
   const [loading, setLoading] = useState(true);
   const [cart, setCart] = useState<{ productId: number; quantity: number }[]>([]);
 
@@ -14,7 +15,7 @@ export const ProductCatalog: React.FC = () => {
       try {
         const [productData, categoryData] = await Promise.all([
           productService.getAll(),
-          productService.getCategories()
+          productService.getCategories(),
         ]);
 
         setProducts(productData.products || []);
@@ -30,99 +31,132 @@ export const ProductCatalog: React.FC = () => {
   }, []);
 
   const addToCart = (productId: number) => {
-    setCart(prev => {
-      const existing = prev.find(item => item.productId === productId);
+    setCart((prev) => {
+      const existing = prev.find((item) => item.productId === productId);
       if (existing) {
-        return prev.map(item =>
-          item.productId === productId
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
+        return prev.map((item) =>
+          item.productId === productId ? { ...item, quantity: item.quantity + 1 } : item
         );
       }
       return [...prev, { productId, quantity: 1 }];
     });
   };
 
-  const filteredProducts = selectedCategory
-    ? products.filter(p => p.category === selectedCategory)
-    : products;
+  const filteredProducts = useMemo(() => {
+    const byCategory = selectedCategory
+      ? products.filter((p) => p.category === selectedCategory)
+      : products;
+    const normalizedQuery = query.trim().toLowerCase();
+    if (!normalizedQuery) return byCategory;
+    return byCategory.filter(
+      (p) =>
+        p.name.toLowerCase().includes(normalizedQuery) ||
+        (p.description || '').toLowerCase().includes(normalizedQuery)
+    );
+  }, [products, selectedCategory, query]);
 
-  if (loading) return <div className="text-center py-8">Loading products...</div>;
+  const cartItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+  const cartTotal = cart.reduce((sum, item) => {
+    const product = products.find((p) => p.id === item.productId);
+    return sum + (product?.price || 0) * item.quantity;
+  }, 0);
+
+  if (loading) {
+    return <div className="card-surface p-8 text-center text-stone-600">Loading products...</div>;
+  }
 
   return (
-    <div className="space-y-6">
-      <h2 className="text-2xl font-bold">Wedding Shop</h2>
-
-      {/* Categories */}
-      {categories.length > 0 && (
-        <div className="flex gap-2 flex-wrap">
-          <button
-            onClick={() => setSelectedCategory('')}
-            className={`px-4 py-2 rounded font-medium ${
-              selectedCategory === ''
-                ? 'bg-purple-600 text-white'
-                : 'bg-gray-200 text-gray-800'
-            }`}
-          >
-            All Products
-          </button>
-          {categories.map(cat => (
+    <div className="space-y-5">
+      <div className="card-surface p-4 sm:p-5">
+        <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+          <div className="flex flex-wrap gap-2">
             <button
-              key={cat}
-              onClick={() => setSelectedCategory(cat)}
-              className={`px-4 py-2 rounded font-medium ${
-                selectedCategory === cat
-                  ? 'bg-purple-600 text-white'
-                  : 'bg-gray-200 text-gray-800'
-              }`}
+              type="button"
+              onClick={() => setSelectedCategory('')}
+              className={selectedCategory === '' ? 'btn-primary' : 'btn-secondary'}
             >
-              {cat}
+              All Products
             </button>
-          ))}
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                type="button"
+                onClick={() => setSelectedCategory(cat)}
+                className={selectedCategory === cat ? 'btn-primary' : 'btn-secondary'}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+          <input
+            type="search"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Search products"
+            className="field w-full lg:max-w-xs"
+            aria-label="Search products"
+          />
         </div>
-      )}
+      </div>
 
-      {/* Products Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {filteredProducts.map(product => (
-          <div key={product.id} className="bg-white rounded-lg shadow overflow-hidden hover:shadow-lg transition">
-            <div className="w-full h-40 bg-gray-200 flex items-center justify-center">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        {filteredProducts.map((product) => (
+          <article key={product.id} className="card-surface overflow-hidden">
+            <div className="relative aspect-[4/3] w-full bg-stone-100">
               {product.imageUrl ? (
-                <img src={product.imageUrl} alt={product.name} className="w-full h-full object-cover" />
+                <img src={product.imageUrl} alt={product.name} className="h-full w-full object-cover" />
               ) : (
-                <span className="text-gray-400">No image</span>
+                <div className="flex h-full items-center justify-center text-sm text-stone-500">Product image</div>
               )}
+              <span className={`absolute left-3 top-3 chip ${product.stockQuantity === 0 ? 'text-red-700' : 'text-stone-700'}`}>
+                {product.stockQuantity === 0 ? 'Out of stock' : product.category}
+              </span>
             </div>
             <div className="p-4">
-              <h3 className="font-bold text-sm mb-1">{product.name}</h3>
-              <p className="text-xs text-gray-600 mb-2">{product.description}</p>
-              <div className="flex justify-between items-center">
-                <span className="font-bold text-lg">${product.price}</span>
+              <h3 className="text-lg font-semibold text-stone-900">{product.name}</h3>
+              <p className="mt-1 line-clamp-2 min-h-[2.75rem] text-sm leading-5 text-stone-600">
+                {product.description || 'Wedding product'}
+              </p>
+              <div className="mt-4 flex items-center justify-between gap-2">
+                <span className="text-xl font-bold text-stone-900">${Number(product.price).toFixed(2)}</span>
                 <button
+                  type="button"
                   onClick={() => addToCart(product.id)}
                   disabled={product.stockQuantity === 0}
-                  className="bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700 disabled:opacity-50"
+                  className={product.stockQuantity === 0 ? 'btn-secondary' : 'btn-primary'}
                 >
                   Add to Cart
                 </button>
               </div>
-              {product.stockQuantity === 0 && (
-                <p className="text-red-600 text-xs mt-2">Out of stock</p>
-              )}
             </div>
-          </div>
+          </article>
         ))}
       </div>
 
-      {/* Cart Summary */}
+      {filteredProducts.length === 0 && (
+        <div className="card-surface p-8 text-center text-stone-600">No products match your filters.</div>
+      )}
+
       {cart.length > 0 && (
-        <div className="bg-blue-50 p-4 rounded-lg">
-          <h3 className="font-bold mb-2">Cart ({cart.length} items)</h3>
-          <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+        <aside className="card-surface-strong p-5">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <h3 className="text-2xl font-semibold text-stone-900">Cart summary</h3>
+              <p className="text-sm text-stone-600">
+                {cartItems} item{cartItems === 1 ? '' : 's'} selected
+              </p>
+            </div>
+            <div className="text-right">
+              <p className="text-sm text-stone-500">Estimated total</p>
+              <p className="text-2xl font-bold text-stone-900">${cartTotal.toFixed(2)}</p>
+            </div>
+          </div>
+          <button type="button" className="btn-primary mt-4 w-full sm:w-auto">
             Proceed to Checkout
           </button>
-        </div>
+        </aside>
       )}
     </div>
   );
 };
+
