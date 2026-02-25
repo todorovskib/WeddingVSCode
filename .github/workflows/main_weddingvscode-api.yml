@@ -17,10 +17,8 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '20.x'
-          cache: 'npm'
-          cache-dependency-path: backend/package-lock.json
 
-      - name: Install dependencies
+      - name: Install backend dependencies
         working-directory: ./backend
         run: npm install
 
@@ -28,9 +26,20 @@ jobs:
         working-directory: ./backend
         run: npm run build
 
+      - name: Prepare deployment package
+        run: |
+          mkdir deploy
+          cp -r backend/dist deploy/dist
+          cp backend/package.json deploy/package.json
+          cp backend/package-lock.json deploy/package-lock.json
+
+      - name: Install production dependencies
+        working-directory: ./deploy
+        run: npm install --production
+
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'weddingvscode-api'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_44AC8ADA949842AB8773CF717A745CA1 }}
-          package: ./backend
+          package: ./deploy
