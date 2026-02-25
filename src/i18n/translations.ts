@@ -435,6 +435,10 @@ const mk: Dictionary = {
   'Collaborations': '\u0421\u043e\u0440\u0430\u0431\u043e\u0442\u043d\u0438\u0446\u0438',
   'Pricing': '\u0426\u0435\u043d\u043e\u0432\u043d\u0438\u043a',
   'Cookie Policy': '\u041f\u043e\u043b\u0438\u0442\u0438\u043a\u0430 \u0437\u0430 \u043a\u043e\u043b\u0430\u0447\u0438\u045a\u0430',
+  'Back': '\u041d\u0430\u0437\u0430\u0434',
+  'Password': '\u041b\u043e\u0437\u0438\u043d\u043a\u0430',
+  'First Name': '\u0418\u043c\u0435',
+  'Last Name': '\u041f\u0440\u0435\u0437\u0438\u043c\u0435',
 };
 
 const mkEntriesByLength = Object.entries(mk).sort((a, b) => b[0].length - a[0].length);

@@ -4,11 +4,18 @@ import { useAuth } from '../context/AuthContext';
 import { useI18n } from '../context/I18nContext';
 import { BrandLogo } from './BrandLogo';
 
-const navLinkClass = ({ isActive }: { isActive: boolean }) =>
-  `rounded-xl px-3.5 py-2 text-sm font-semibold transition ${
+const desktopNavLinkClass = ({ isActive }: { isActive: boolean }) =>
+  `group relative inline-flex items-center py-3 text-[15px] font-semibold transition-colors ${
     isActive
-      ? 'bg-gradient-to-r from-rose-100 via-amber-50 to-sky-100 text-stone-950 ring-1 ring-rose-200 shadow-[0_10px_20px_rgba(28,18,13,0.10)]'
-      : 'text-stone-700 hover:bg-white/75 hover:text-stone-900'
+      ? 'text-stone-950'
+      : 'text-stone-700 hover:text-stone-900'
+  }`;
+
+const mobileNavLinkClass = ({ isActive }: { isActive: boolean }) =>
+  `rounded-2xl px-4 py-3 text-base font-semibold transition ${
+    isActive
+      ? 'bg-gradient-to-r from-rose-100/90 via-amber-50/90 to-sky-100/90 text-stone-950 ring-1 ring-rose-200/80 shadow-[0_12px_24px_rgba(28,18,13,0.08)]'
+      : 'text-stone-700 hover:bg-white/70 hover:text-stone-900'
   }`;
 
 export const Navigation: React.FC = () => {
@@ -38,40 +45,52 @@ export const Navigation: React.FC = () => {
 
   return (
     <header className="sticky top-0 z-40 border-b border-stone-300/60 bg-[#f4ede3]/88 backdrop-blur-xl">
-      <div className="page-wrap py-2.5">
-        <div className="card-surface flex items-center justify-between gap-3 px-3 py-2 sm:px-4">
+      <div className="w-full px-4 sm:px-6 lg:px-10">
+        <div className="flex min-h-[78px] items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <Link to="/" className="rounded-xl px-2 py-1.5 hover:bg-white/60" aria-label="WedMKD">
+            <Link to="/" className="shrink-0 py-1" aria-label="WedMKD">
               <BrandLogo subtitle={t('Wedding Platform')} />
             </Link>
 
-            <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary">
+            <nav className="hidden items-center gap-5 xl:gap-6 lg:flex" aria-label="Primary">
               {publicLinks.map((item) => (
-                <NavLink key={item.to} to={item.to} className={navLinkClass} end={item.end}>
+                <NavLink key={item.to} to={item.to} className={desktopNavLinkClass} end={item.end}>
                   {({ isActive }) => (
-                    <span className="inline-flex items-center gap-2">
+                    <span className="relative inline-flex items-center gap-2 pb-0.5">
                       <span
                         aria-hidden
                         className={`h-1.5 w-1.5 rounded-full transition ${
-                          isActive ? 'scale-100 bg-gradient-to-r from-rose-500 to-sky-500 opacity-100' : 'scale-0 opacity-0'
+                          isActive ? 'scale-100 bg-gradient-to-r from-rose-500 to-sky-500 opacity-100' : 'scale-90 bg-stone-300 opacity-50 group-hover:opacity-80'
                         }`}
                       />
                       {t(item.label)}
+                      <span
+                        aria-hidden
+                        className={`absolute -bottom-1 left-0 h-[2px] rounded-full bg-gradient-to-r from-rose-500 via-amber-400 to-sky-500 transition-all duration-300 ${
+                          isActive ? 'w-full opacity-100' : 'w-0 opacity-0 group-hover:w-full group-hover:opacity-60'
+                        }`}
+                      />
                     </span>
                   )}
                 </NavLink>
               ))}
               {token && (
-                <NavLink to="/dashboard" className={navLinkClass}>
+                <NavLink to="/dashboard" className={desktopNavLinkClass}>
                   {({ isActive }) => (
-                    <span className="inline-flex items-center gap-2">
+                    <span className="relative inline-flex items-center gap-2 pb-0.5">
                       <span
                         aria-hidden
                         className={`h-1.5 w-1.5 rounded-full transition ${
-                          isActive ? 'scale-100 bg-gradient-to-r from-rose-500 to-sky-500 opacity-100' : 'scale-0 opacity-0'
+                          isActive ? 'scale-100 bg-gradient-to-r from-rose-500 to-sky-500 opacity-100' : 'scale-90 bg-stone-300 opacity-50 group-hover:opacity-80'
                         }`}
                       />
                       {t('Dashboard')}
+                      <span
+                        aria-hidden
+                        className={`absolute -bottom-1 left-0 h-[2px] rounded-full bg-gradient-to-r from-rose-500 via-amber-400 to-sky-500 transition-all duration-300 ${
+                          isActive ? 'w-full opacity-100' : 'w-0 opacity-0 group-hover:w-full group-hover:opacity-60'
+                        }`}
+                      />
                     </span>
                   )}
                 </NavLink>
@@ -79,13 +98,13 @@ export const Navigation: React.FC = () => {
             </nav>
           </div>
 
-          <div className="hidden items-center gap-2 md:flex">
-            <div className="inline-flex items-center rounded-lg border border-stone-200 bg-white/80 p-1">
+          <div className="hidden items-center gap-2.5 md:flex">
+            <div className="inline-flex items-center rounded-full border border-stone-200/80 bg-white/75 p-1.5 shadow-[0_8px_16px_rgba(28,18,13,0.05)]">
               <button
                 type="button"
                 onClick={() => setLanguage('en')}
-                className={`rounded-md px-2 py-1 text-xs font-semibold transition ${
-                  language === 'en' ? 'bg-stone-900 text-white' : 'text-stone-600 hover:text-stone-900'
+                className={`rounded-full px-3 py-1.5 text-xs font-semibold transition ${
+                  language === 'en' ? 'bg-stone-900 text-white shadow-sm' : 'text-stone-600 hover:text-stone-900'
                 }`}
                 aria-label={t('English')}
               >
@@ -94,8 +113,8 @@ export const Navigation: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setLanguage('mk')}
-                className={`rounded-md px-2 py-1 text-xs font-semibold transition ${
-                  language === 'mk' ? 'bg-stone-900 text-white' : 'text-stone-600 hover:text-stone-900'
+                className={`rounded-full px-3 py-1.5 text-xs font-semibold transition ${
+                  language === 'mk' ? 'bg-stone-900 text-white shadow-sm' : 'text-stone-600 hover:text-stone-900'
                 }`}
                 aria-label={t('Macedonian')}
               >
@@ -104,17 +123,17 @@ export const Navigation: React.FC = () => {
             </div>
             {token && user ? (
               <>
-                <span className="chip">{user.email}</span>
-                <button onClick={handleLogout} className="btn-secondary">
+                <span className="hidden text-sm font-medium text-stone-600 lg:inline">{user.email}</span>
+                <button onClick={handleLogout} className="btn-secondary px-5 py-2.5">
                   {t('Logout')}
                 </button>
               </>
             ) : (
               <>
-                <button onClick={() => navigate('/login')} className="btn-ghost">
+                <button onClick={() => navigate('/login')} className="btn-ghost rounded-full px-4 py-2.5 text-sm font-semibold text-stone-700 hover:bg-white/75">
                   {t('Sign In')}
                 </button>
-                <button onClick={() => navigate('/signup')} className="btn-primary">
+                <button onClick={() => navigate('/signup')} className="btn-primary rounded-full px-5 py-2.5 text-sm">
                   {t('Create Account')}
                 </button>
               </>
@@ -124,7 +143,7 @@ export const Navigation: React.FC = () => {
           <button
             type="button"
             aria-label="Toggle menu"
-            className="btn-secondary lg:hidden"
+            className="inline-flex h-11 items-center justify-center rounded-full border border-stone-200/90 bg-white/80 px-4 text-sm font-semibold text-stone-800 shadow-[0_8px_18px_rgba(28,18,13,0.06)] backdrop-blur lg:hidden"
             onClick={() => setMenuOpen((open) => !open)}
           >
             {t('Menu')}
@@ -132,55 +151,57 @@ export const Navigation: React.FC = () => {
         </div>
 
         {menuOpen && (
-          <div className="card-surface mt-2 space-y-2 p-3 lg:hidden">
-            <div className="mb-1 flex items-center justify-between rounded-lg border border-stone-200/80 bg-white/80 px-3 py-2">
+          <div className="mb-3 rounded-[22px] border border-stone-200/80 bg-white/88 p-4 shadow-[0_18px_40px_rgba(28,18,13,0.08)] backdrop-blur-xl lg:hidden">
+            <div className="mb-3 flex items-center justify-between rounded-2xl border border-stone-200/80 bg-white/80 px-4 py-3">
               <span className="text-xs uppercase tracking-[0.12em] text-stone-500">{t('Language')}</span>
-              <div className="inline-flex rounded-md border border-stone-200 bg-white p-1">
+              <div className="inline-flex rounded-full border border-stone-200 bg-white p-1">
                 <button
                   type="button"
                   onClick={() => setLanguage('en')}
-                  className={`rounded px-2 py-1 text-xs font-semibold ${language === 'en' ? 'bg-stone-900 text-white' : 'text-stone-700'}`}
+                  className={`rounded-full px-3 py-1.5 text-xs font-semibold ${language === 'en' ? 'bg-stone-900 text-white' : 'text-stone-700'}`}
                 >
                   EN
                 </button>
                 <button
                   type="button"
                   onClick={() => setLanguage('mk')}
-                  className={`rounded px-2 py-1 text-xs font-semibold ${language === 'mk' ? 'bg-stone-900 text-white' : 'text-stone-700'}`}
+                  className={`rounded-full px-3 py-1.5 text-xs font-semibold ${language === 'mk' ? 'bg-stone-900 text-white' : 'text-stone-700'}`}
                 >
                   MK
                 </button>
               </div>
             </div>
-            {publicLinks.map((item) => (
-              <NavLink
-                key={item.to}
-                to={item.to}
-                className={navLinkClass}
-                end={item.end}
-                onClick={() => setMenuOpen(false)}
-              >
-                {({ isActive }) => (
-                  <span className="inline-flex items-center gap-2">
-                    <span
-                      aria-hidden
-                      className={`h-1.5 w-1.5 rounded-full transition ${
-                        isActive ? 'scale-100 bg-gradient-to-r from-rose-500 to-sky-500 opacity-100' : 'scale-0 opacity-0'
-                      }`}
-                    />
-                    {t(item.label)}
-                  </span>
-                )}
-              </NavLink>
-            ))}
+            <div className="space-y-2">
+              {publicLinks.map((item) => (
+                <NavLink
+                  key={item.to}
+                  to={item.to}
+                  className={mobileNavLinkClass}
+                  end={item.end}
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {({ isActive }) => (
+                    <span className="inline-flex items-center gap-2">
+                      <span
+                        aria-hidden
+                        className={`h-2 w-2 rounded-full transition ${
+                          isActive ? 'scale-100 bg-gradient-to-r from-rose-500 to-sky-500 opacity-100' : 'scale-90 bg-stone-300 opacity-70'
+                        }`}
+                      />
+                      {t(item.label)}
+                    </span>
+                  )}
+                </NavLink>
+              ))}
+            </div>
             {token && (
-              <NavLink to="/dashboard" className={navLinkClass} onClick={() => setMenuOpen(false)}>
+              <NavLink to="/dashboard" className={mobileNavLinkClass} onClick={() => setMenuOpen(false)}>
                 {({ isActive }) => (
                   <span className="inline-flex items-center gap-2">
                     <span
                       aria-hidden
-                      className={`h-1.5 w-1.5 rounded-full transition ${
-                        isActive ? 'scale-100 bg-gradient-to-r from-rose-500 to-sky-500 opacity-100' : 'scale-0 opacity-0'
+                      className={`h-2 w-2 rounded-full transition ${
+                        isActive ? 'scale-100 bg-gradient-to-r from-rose-500 to-sky-500 opacity-100' : 'scale-90 bg-stone-300 opacity-70'
                       }`}
                     />
                     {t('Dashboard')}
@@ -188,7 +209,7 @@ export const Navigation: React.FC = () => {
                 )}
               </NavLink>
             )}
-            <div className="border-t border-stone-200/80 pt-2">
+            <div className="mt-3 border-t border-stone-200/80 pt-3">
               {token && user ? (
                 <div className="space-y-2">
                   <p className="text-xs text-stone-600">{user.email}</p>
@@ -209,7 +230,7 @@ export const Navigation: React.FC = () => {
                       setMenuOpen(false);
                       navigate('/login');
                     }}
-                    className="btn-secondary"
+                    className="btn-secondary py-3"
                   >
                     {t('Sign In')}
                   </button>
@@ -218,7 +239,7 @@ export const Navigation: React.FC = () => {
                       setMenuOpen(false);
                       navigate('/signup');
                     }}
-                    className="btn-primary"
+                    className="btn-primary py-3"
                   >
                     {t('Sign Up')}
                   </button>
