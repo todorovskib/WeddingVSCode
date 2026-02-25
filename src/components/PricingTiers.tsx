@@ -48,7 +48,7 @@ const TIERS: Tier[] = [
 
 export const PricingTiers: React.FC<{ onSelectTier?: (tier: Tier) => void }> = ({ onSelectTier }) => {
   const [selectedTier, setSelectedTier] = useState<number | null>(2);
-  const { t, language } = useI18n();
+  const { t } = useI18n();
 
   const handleSelect = (tier: Tier) => {
     setSelectedTier(tier.id);
@@ -97,9 +97,7 @@ export const PricingTiers: React.FC<{ onSelectTier?: (tier: Tier) => void }> = (
                 <span className="text-3xl font-bold text-stone-900">${tier.price}</span>
                 <span className="text-sm text-stone-500">{t('per wedding')}</span>
               </p>
-              <p className="mt-1 text-sm text-stone-600">
-                {language === 'mk' ? `До ${tier.maxGuests} гости` : `Up to ${tier.maxGuests} guests`}
-              </p>
+              <p className="mt-1 text-sm text-stone-600">{`${t('Up to')} ${tier.maxGuests} ${t('guests')}`}</p>
 
               <button
                 type="button"
@@ -109,7 +107,12 @@ export const PricingTiers: React.FC<{ onSelectTier?: (tier: Tier) => void }> = (
                 {selected ? t('Selected Plan') : t('Select Plan')}
               </button>
 
-              <Link to={tier.samplePath} className="btn-ghost mt-2 w-full justify-center text-rose-700">
+              <Link
+                to={tier.samplePath}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-ghost mt-2 w-full justify-center text-rose-700"
+              >
                 {t('View Sample Website')}
               </Link>
 

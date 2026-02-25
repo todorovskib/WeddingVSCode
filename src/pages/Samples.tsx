@@ -37,6 +37,7 @@ export const Samples: React.FC = () => {
         description="Use these as conversion tools and visual references for future design expansion."
         ctaLabel="Open Premium Sample"
         ctaTo="/samples/premium"
+        ctaNewTab
         accentClass="from-amber-400 via-rose-500 to-fuchsia-600"
       />
 
@@ -105,7 +106,7 @@ export const Samples: React.FC = () => {
                   ))}
                 </ul>
                 <div className="mt-5 flex gap-2">
-                  <Link to={tier.route} className="btn-primary flex-1">
+                  <Link to={tier.route} target="_blank" rel="noopener noreferrer" className="btn-primary flex-1">
                     {t('Open Sample')}
                   </Link>
                   <Link to="/signup" className="btn-secondary">
@@ -164,9 +165,9 @@ export const Samples: React.FC = () => {
                 <li>{t('Reduce ambiguity around what each tier includes')}</li>
               </ul>
               <div className="mt-4 flex flex-wrap gap-2">
-                <Link to="/samples/basic" className="btn-secondary">{t('Basic')}</Link>
-                <Link to="/samples/pro" className="btn-secondary">{t('Pro')}</Link>
-                <Link to="/samples/premium" className="btn-primary">{t('Premium')}</Link>
+                <Link to="/samples/basic" target="_blank" rel="noopener noreferrer" className="btn-secondary">{t('Basic')}</Link>
+                <Link to="/samples/pro" target="_blank" rel="noopener noreferrer" className="btn-secondary">{t('Pro')}</Link>
+                <Link to="/samples/premium" target="_blank" rel="noopener noreferrer" className="btn-primary">{t('Premium')}</Link>
               </div>
             </div>
             <div className="grid grid-cols-2 gap-3">

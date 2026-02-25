@@ -8,6 +8,7 @@ interface AnnouncementBarProps {
   description?: string;
   ctaLabel?: string;
   ctaTo?: string;
+  ctaNewTab?: boolean;
   accentClass?: string;
   dismissible?: boolean;
 }
@@ -18,6 +19,7 @@ export const AnnouncementBar: React.FC<AnnouncementBarProps> = ({
   description,
   ctaLabel,
   ctaTo,
+  ctaNewTab = false,
   accentClass = 'from-rose-400 via-fuchsia-500 to-violet-600',
   dismissible = true,
 }) => {
@@ -51,7 +53,12 @@ export const AnnouncementBar: React.FC<AnnouncementBarProps> = ({
           </div>
           <div className="flex items-center gap-2">
             {ctaLabel && ctaTo && (
-              <Link to={ctaTo} className="btn-secondary shrink-0">
+              <Link
+                to={ctaTo}
+                className="btn-secondary shrink-0"
+                target={ctaNewTab ? '_blank' : undefined}
+                rel={ctaNewTab ? 'noopener noreferrer' : undefined}
+              >
                 {t(ctaLabel)}
               </Link>
             )}

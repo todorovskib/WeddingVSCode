@@ -237,9 +237,9 @@ export const Services: React.FC = () => {
                 {t('Open the tier samples to show clients exactly what each plan level looks like in a guest-facing experience.')}
               </p>
               <div className="mt-5 flex flex-wrap gap-2">
-                <Link to="/samples/basic" className="btn-secondary">{t('Basic')}</Link>
-                <Link to="/samples/pro" className="btn-secondary">{t('Pro')}</Link>
-                <Link to="/samples/premium" className="btn-primary">{t('Premium')}</Link>
+                <Link to="/samples/basic" target="_blank" rel="noopener noreferrer" className="btn-secondary">{t('Basic')}</Link>
+                <Link to="/samples/pro" target="_blank" rel="noopener noreferrer" className="btn-secondary">{t('Pro')}</Link>
+                <Link to="/samples/premium" target="_blank" rel="noopener noreferrer" className="btn-primary">{t('Premium')}</Link>
                 <Link to="/collaborations" className="btn-secondary">{t('Collaborations')}</Link>
               </div>
             </div>

@@ -1,4 +1,4 @@
-export type SampleTierKey = 'basic' | 'pro' | 'premium';
+﻿export type SampleTierKey = 'basic' | 'pro' | 'premium';
 
 export type SampleTabId =
   | 'home'
@@ -93,6 +93,11 @@ export const tierSamples: Record<SampleTierKey, TierSampleConfig> = {
       { name: 'Coffee machine', price: '$180', status: 'available' },
       { name: 'Dinner set', price: '$120', status: 'reserved' },
     ],
+    seating: [
+      { table: 'Head Table', guests: ['Couple', 'Witnesses', 'Best Friends'] },
+      { table: 'Family', guests: ['Parents', 'Siblings', 'Grandparents'] },
+      { table: 'Friends', guests: ['Close friends', 'Plus ones'] },
+    ],
   },
   pro: {
     key: 'pro',
@@ -134,13 +139,18 @@ export const tierSamples: Record<SampleTierKey, TierSampleConfig> = {
     ],
     faq: [
       { q: 'Is parking available?', a: 'Yes, valet and self-parking are both available at the venue entrance.' },
-      { q: 'Do you have hotel suggestions?', a: 'We’ve reserved rates at two nearby hotels; see the details tab for links.' },
+      { q: 'Do you have hotel suggestions?', a: "We've reserved rates at two nearby hotels; see the details tab for links." },
       { q: 'Can I submit dietary requirements?', a: 'Yes, use the RSVP form and include allergies or preferences.' },
     ],
     registry: [
       { name: 'Travel fund', price: '$500', status: 'available' },
       { name: 'Stand mixer', price: '$320', status: 'available' },
       { name: 'Cookware set', price: '$240', status: 'reserved' },
+    ],
+    seating: [
+      { table: 'Table A', guests: ['Parents', 'Witnesses', 'Close family'] },
+      { table: 'Table B', guests: ['Friends from school', 'Friends from work'] },
+      { table: 'Table C', guests: ['Extended family', 'Family friends'] },
     ],
   },
   premium: {
