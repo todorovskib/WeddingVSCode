@@ -59,7 +59,7 @@ export const tierSamples: Record<SampleTierKey, TierSampleConfig> = {
     heroImage: imageSet[1],
     collageImages: [imageSet[1], imageSet[3], imageSet[4]],
     couple: {
-      names: 'Marija & Stefan',
+      names: 'Maria & Stefan',
       date: 'June 15, 2027',
       time: '18:00',
       venue: 'Hotel Aleksandar Palace',
