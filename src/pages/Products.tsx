@@ -103,7 +103,7 @@ const testimonials = [
 export const ProductsPage: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState('all');
   const [hovered, setHovered] = useState<string | null>(null);
-  const { t } = useI18n();
+  const { t, pathFor } = useI18n();
 
   const filteredShowcase = useMemo(
     () =>
@@ -138,10 +138,10 @@ export const ProductsPage: React.FC = () => {
                 {t('This page uses richer imagery, collection cards, and vendor-oriented sections to present products and partnerships in a more curated, premium way.')}
               </p>
               <div className="mt-6 flex flex-wrap gap-2">
-                <Link to="/contact" className="btn-primary">{t('Partner With Us')}</Link>
-                <Link to="/collaborations" className="btn-secondary">{t('Collaborations')}</Link>
-                <Link to="/services" className="btn-secondary">{t('See Services')}</Link>
-                <Link to="/samples" className="btn-secondary">{t('See Samples')}</Link>
+                <Link to={pathFor('/contact')} className="btn-primary">{t('Partner With Us')}</Link>
+                <Link to={pathFor('/collaborations')} className="btn-secondary">{t('Collaborations')}</Link>
+                <Link to={pathFor('/services')} className="btn-secondary">{t('See Services')}</Link>
+                <Link to={pathFor('/samples')} className="btn-secondary">{t('See Samples')}</Link>
               </div>
               <div className="mt-6 grid grid-cols-3 gap-3">
                 {[
@@ -174,7 +174,7 @@ export const ProductsPage: React.FC = () => {
             <p className="section-kicker">{t('Curated Collections')}</p>
             <h2 className="mt-2 text-4xl font-semibold text-stone-900">{t('Image-first merchandising blocks')}</h2>
           </div>
-          <Link to="/contact" className="btn-secondary">{t('Start a vendor conversation')}</Link>
+          <Link to={pathFor('/contact')} className="btn-secondary">{t('Start a vendor conversation')}</Link>
         </div>
         <div className="grid grid-cols-1 gap-5 xl:grid-cols-3">
           {curatedCollections.map((collection) => (
@@ -264,7 +264,7 @@ export const ProductsPage: React.FC = () => {
                 </div>
               ))}
             </div>
-            <Link to="/contact" className="btn-primary mt-4 w-full">{t('Become a Partner')}</Link>
+            <Link to={pathFor('/contact')} className="btn-primary mt-4 w-full">{t('Become a Partner')}</Link>
           </div>
 
           <div className="grid grid-cols-2 gap-3">

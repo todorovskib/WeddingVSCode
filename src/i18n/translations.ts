@@ -608,16 +608,266 @@ Object.assign(mkOverrides, {
   'No matching guest in this demo list.': 'Нема гостин што одговара во оваа демо листа.',
 });
 
+Object.assign(mkOverrides, {
+  'Share your day beautifully': 'Споделете го вашиот ден прекрасно',
+  'Elegant wedding websites, made by hand': 'Елегантни свадбени веб-страници, изработени рачно',
+
+  'Essential Invite Page': 'Основна покана страница',
+  'Interactive Wedding Story': 'Интерактивна свадбена приказна',
+  'Wedding Weekend Experience': 'Свадбено викенд искуство',
+  'Signature Concierge Wedding Site': 'Премиум консиерж свадбена страница',
+  'A beautiful invitation page with date, venue, RSVP, and a clean guest-first flow.':
+    'Убава покана страница со датум, локација, RSVP и чист тек за гостите.',
+  'A simple wedding page that invites guests beautifully.':
+    'Едноставна свадбена страница што ги поканува гостите на убав начин.',
+  'Beautiful hero invitation page': 'Убава почетна покана страница',
+  'Event date, time, and venue section': 'Секција за датум, време и локација',
+  'Simple RSVP form': 'Едноставна форма за потврда',
+  'Dress code and FAQ basics': 'Основи за дрес-код и ЧПП',
+  'Everything in Basic': 'Сè од Basic',
+  'Animated envelope intro': 'Анимирано отворање на коверт',
+  'Story-led couple landing page': 'Почетна страница за парот со приказна',
+  'Gallery and location sections': 'Секции за галерија и локација',
+  'Enhanced RSVP with guest message': 'Напредна потврда со порака од гостин',
+  'Everything in Plus': 'Сè од Plus',
+  'Weekend schedule / timeline': 'Викенд распоред / временска линија',
+  'Travel and accommodation details': 'Детали за патување и сместување',
+  'Gift registry section': 'Секција за подароци',
+  'Gallery with modal viewing': 'Галерија со преглед во модал',
+  'Expanded FAQ and guest guidance': 'Проширен ЧПП и насоки за гости',
+  'Everything in Premium': 'Сè од Premium',
+  'Multi-event weekend pages': 'Повеќенаменски викенд страници',
+  'Seating and table preview': 'Преглед на седење и маси',
+  'Concierge contact / guest support': 'Консиерж контакт / поддршка за гости',
+  'Private notes and custom RSVP questions': 'Приватни белешки и прилагодени RSVP прашања',
+  'Signature luxury visual direction': 'Премиум луксузна визуелна насока',
+  'Basic + animated invitation opening + richer guest experience.':
+    'Basic + анимирано отворање на поканата + побогато искуство за гости.',
+  'Plus + timeline, travel, registry, and full wedding-weekend presentation.':
+    'Plus + временска линија, патување, подароци и целосна викенд свадбена презентација.',
+  'Premium + concierge guest flow, seating, and signature multi-event experience.':
+    'Premium + консиерж тек за гости, седење и премиум повеќенаменско искуство.',
+  'Everything in Basic, plus an animated invite opening, richer sections, gallery, and a more personal wedding experience.':
+    'Сè од Basic, плус анимирано отворање на покана, побогати секции, галерија и полично свадбено искуство.',
+  'Plus + travel details, timeline, registry, FAQ, and a polished full wedding-weekend guest website.':
+    'Plus + детали за патување, временска линија, подароци, ЧПП и полирана целосна викенд страница за гости.',
+  'Premium + concierge-style guest communication, seating preview, multiple events, private notes, and luxury storytelling design.':
+    'Premium + консиерж комуникација со гости, преглед на седење, повеќе настани, приватни белешки и луксузен дизајн со приказна.',
+
+  'Custom wedding services, designed by hand': 'Персонализирани свадбени услуги, изработени рачно',
+  'From invitation pages and RSVP flows to planning tools and premium presentation, every wedding experience is designed to feel personal, elegant, and clear for guests.':
+    'Од покана страници и RSVP текови до алатки за планирање и премиум презентација, секое свадбено искуство е дизајнирано да биде лично, елегантно и јасно за гостите.',
+  'Guest Management': 'Менаџирање гости',
+  'Digital Invitations': 'Дигитални покани',
+  'Planning Tools': 'Алатки за планирање',
+  'Guest Website Experience': 'Искуство со веб-страница за гости',
+  'Wedding Shop & Products': 'Свадбена продавница и производи',
+  'Tier-Based Samples': 'Примери по пакет',
+  'Track guests, plus-ones, relationships, dietary needs, and RSVP status from one dashboard.':
+    'Следете гости, придружби, врски, диететски потреби и статус на потврда од една табла.',
+  'Create polished invitation pages and shareable links with a modern guest-facing experience.':
+    'Креирајте полирани покана страници и линкови за споделување со модерно искуство за гости.',
+  'Checklist, timeline, and budget views designed for actual planning, not just decoration.':
+    'Прегледи за листа со задачи, временска линија и буџет дизајнирани за вистинско планирање, не само за декорација.',
+  'Build a public-facing site with story, venue details, gallery, FAQ, and registry in one place.':
+    'Изградете јавна страница со приказна, детали за локација, галерија, ЧПП и подароци на едно место.',
+  'Showcase invitations, decor, candles, and gifts with a more premium storefront layout.':
+    'Прикажете покани, декор, свеќи и подароци со попремиум распоред како продавница.',
+  'Show couples exactly what Basic, Plus, Premium, and Platinum sites can look like before choosing.':
+    'Покажете им на паровите точно како може да изгледаат Basic, Plus, Premium и Platinum страниците пред избор.',
+  'Guest segmentation': 'Сегментација на гости',
+  'RSVP tracking': 'Следење потврди',
+  'Address collection': 'Собирање адреси',
+  'Dietary notes': 'Белешки за исхрана',
+  'Save-the-date pages': 'Save-the-date страници',
+  'Visual themes': 'Визуелни теми',
+  'Guest links': 'Линкови за гости',
+  'Update notices': 'Известувања за ажурирање',
+  'Checklist progress': 'Напредок на листа со задачи',
+  'Event timeline': 'Временска линија на настан',
+  'Budget snapshots': 'Прегледи на буџет',
+  'Organizer workflow': 'Тек за организатор',
+  'Hero landing page': 'Почетна hero страница',
+  'FAQ + registry': 'ЧПП + подароци',
+  'Gallery previews': 'Прегледи на галерија',
+  'Venue details': 'Детали за локација',
+  'Product cards': 'Картички за производи',
+  'Category filters': 'Филтри по категорија',
+  'Cart summary': 'Преглед на кошничка',
+  'Vendor-ready sections': 'Секции подготвени за партнери',
+  'Basic sample': 'Basic пример',
+  'Plus sample': 'Plus пример',
+  'Premium sample': 'Premium пример',
+  'Platinum sample': 'Platinum пример',
+  'Service bundles by wedding stage': 'Пакети на услуги според свадбена фаза',
+  'Compare via samples': 'Спореди преку примери',
+  'Launch': 'Почеток',
+  'Growth': 'Раст',
+  'Signature': 'Потпис',
+  'Website essentials, RSVP, checklist, and a clean starter experience.':
+    'Основи за веб-страница, потврди, листа со задачи и чисто почетно искуство.',
+  'Adds planning depth, richer tabs, and a more complete guest experience.':
+    'Додава повеќе длабочина за планирање, побогати табови и покомплетно искуство за гости.',
+  'Premium visual presentation and expanded guest/registry workflows.':
+    'Премиум визуелна презентација и проширени текови за гости и подароци.',
+  'Basic website': 'Основна веб-страница',
+  'RSVP page': 'Страница за потврда',
+  'Checklist': 'Листа со задачи',
+  'Guest list starter': 'Почетна листа на гости',
+  'Timeline': 'Временска линија',
+  'Budget tracker': 'Следач на буџет',
+  'Gallery': 'Галерија',
+  'Advanced RSVP': 'Напредна потврда',
+  'Registry': 'Подароци',
+  'FAQ': 'ЧПП',
+  'Seating preview': 'Преглед на седење',
+  'Premium samples': 'Премиум примери',
+    'How couples use WedMKD': 'Како паровите го користат WedMKD',
+  'Choose style direction': 'Изберете насока на стил',
+  'Pick a tier sample and visual tone inspired by premium wedding platforms.':
+    'Изберете пример по пакет и визуелен тон инспириран од премиум свадбени платформи.',
+  'Set up your wedding': 'Поставете ја вашата свадба',
+  'Create the event, add details, and publish your guest-facing site.':
+    'Креирајте настан, додадете детали и објавете ја страницата за гости.',
+  'Manage guest experience': 'Менаџирај искуство за гости',
+  'Collect RSVPs, dietary notes, addresses, and questions.':
+    'Собирајте потврди, белешки за исхрана, адреси и прашања.',
+  'Expand with products and partners': 'Проширете со производи и партнери',
+  'Showcase items and vendor categories as the site grows.':
+    'Прикажувајте производи и категории на партнери како што расте страницата.',
+  'Need a richer demo before choosing?': 'Ви треба подетален пример пред избор?',
+  'Open the tier samples to show clients exactly what each plan level looks like in a guest-facing experience.':
+    'Отворете ги примерите по пакет за да им покажете на клиентите точно како изгледа секое ниво во искуство за гости.',
+  'A service page that feels premium and credible': 'Страница за услуги што изгледа премиум и доверливо',
+  'Custom service presentation with clearer structure, richer visuals, and more wedding-first storytelling.':
+    'Презентација на услуги со појасна структура, побогати визуали и повеќе свадбено-ориентирана приказна.',
+  'The Services page now looks like an actual premium platform menu, not a placeholder.':
+    'Страницата за услуги сега изгледа како вистинско премиум мени на платформа, а не како привремен приказ.',
+  'Clients understand the difference between tiers much faster when they can see sample pages and service bundles.':
+    'Клиентите многу побрзо ја разбираат разликата меѓу пакетите кога гледаат примери и групирани услуги.',
+  'The richer visuals and image-led layout make the whole product feel more trustworthy.':
+    'Побогатите визуали и распоредот воден од слики го прават целиот производ подоверлив.',
+  'Studio Owner': 'Сопственик на студио',
+  'Wedding planner partner': 'Партнер свадбен планер',
+  'Sales Demo Feedback': 'Повратни информации од продажна демо-презентација',
+  'Product direction': 'Насока на производ',
+  'Couple User Test': 'Тест со корисници-пар',
+  'Beta user': 'Бета корисник',
+  'More inquiries': 'Повеќе прашања',
+  'Clearer positioning': 'Појасно позиционирање',
+  'Higher confidence': 'Поголема доверба',
+
+  'This page uses richer imagery, collection cards, and vendor-oriented sections to present products and partnerships in a more curated, premium way.':
+    'Оваа страница користи побогати слики, колекциски картички и секции за партнери за да прикаже производи и соработки на покурирани и попремиум начин.',
+
+  'Can you help adapt the visual style to feel more premium?':
+    'Можете ли да помогнете визуелниот стил да изгледа попремиум?',
+  'Yes. We can push further on visual polish with richer motion, stronger art direction, custom sample flows, and more editorial wedding layouts.':
+    'Да. Можеме дополнително да го унапредиме визуелниот изглед со побогата анимација, посилна арт насока, прилагодени текови за примери и поедиторијални свадбени распореди.',
+  'Can we show example sites before purchase?': 'Можеме ли да покажеме пример страници пред купување?',
+  'Yes. The Pricing page includes sample links for each tier and each sample opens as a standalone wedding website in a new tab.':
+    'Да. Страницата за цени вклучува линкови до пример за секој пакет и секој пример се отвора како самостојна свадбена веб-страница во нов таб.',
+  'Do you support vendor partnership pages and marketplace sections?':
+    'Поддржувате ли страници за партнерства и marketplace секции?',
+  'Yes. We can expand vendor spotlights, collaborations, product showcases, and category-based pages based on your needs.':
+    'Да. Можеме да прошириме профили на партнери, соработки, презентации на производи и страници по категории според вашите потреби.',
+  'Can this stay fast while becoming more visual?':
+    'Може ли да остане брзо додека станува повизуелно?',
+  'Yes. The current setup stays lightweight with Vite + React and image-heavy sections can still remain fast with optimized loading and restrained motion.':
+    'Да. Тековната поставеност останува лесна со Vite + React, а секциите со многу слики може да останат брзи со оптимизирано вчитување и умерена анимација.',
+  'Product Walkthrough': 'Преглед на производот',
+  'Overview of pages, tier samples, planning tools, and current product flow.':
+    'Преглед на страниците, примерите по пакет, алатките за планирање и тековниот тек на производот.',
+  'Design Direction Session': 'Сесија за дизајн насока',
+  'Refine colors, typography, page rhythm, and premium visual direction.':
+    'Усогласување на бои, типографија, ритам на страниците и премиум визуелна насока.',
+  'Custom Tier Planning': 'Планирање на прилагодени пакети',
+  'Discuss what Basic / Plus / Premium / Platinum should include for your audience.':
+    'Разговор за тоа што Basic / Plus / Premium / Platinum треба да содржат за вашата публика.',
+  'Preview Samples Before Demo': 'Прегледај примери пред демо',
+});
+
+Object.assign(mkOverrides, {
+  'Share your day beautifully': 'Споделете го вашиот ден прекрасно',
+  'Elegant wedding websites, made by hand': 'Елегантни свадбени веб-страници, изработени рачно',
+  'Products page expanded with curated collections, vendor spotlight cards, and richer merchandising':
+    'Страницата за производи е проширена со курирани колекции, картички за истакнати добавувачи и побогат мерчендајзинг',
+  'The new product page feels much closer to an actual wedding marketplace than a simple catalog grid.':
+    'Новата страница за производи е многу поблиску до вистински свадбен маркетплејс отколку до едноставен каталог.',
+  'The curated collections and category cards make browsing much more intuitive for couples.':
+    'Курираните колекции и картичките по категории го прават разгледувањето многу поинтуитивно за паровите.',
+  'This now supports both products and vendor partnerships visually, which was missing before.':
+    'Ова сега визуелно поддржува и производи и партнерства со добавувачи, што претходно недостасуваше.',
+  'Vendor Partner': 'Партнер добавувач',
+  'Decor supplier': 'Добавувач на декор',
+  'Beta Couple': 'Тест пар',
+  'Product browsing test': 'Тест за разгледување производи',
+  'Product Owner': 'Сопственик на производ',
+  'Marketplace direction': 'Насока на маркетплејс',
+  'Better showcase quality': 'Подобар квалитет на презентација',
+  'Higher engagement': 'Поголем ангажман',
+  'Stronger positioning': 'Посилно позиционирање',
+  'A stronger product page for couples and vendors': 'Посилна страница за производи за парови и добавувачи',
+  'Richer visual merchandising and discovery flow inspired by wedding marketplaces while preserving your fast, integrated catalog.':
+    'Побогат визуелен мерчендајзинг и тек за откривање инспириран од свадбени маркетплејси, со зачуван брз и интегриран каталог.',
+});
+
 const mkLookup: Dictionary = { ...mk, ...mkOverrides };
 
 const mkEntriesByLength = Object.entries(mkLookup).sort((a, b) => b[0].length - a[0].length);
 
+const CP1252_EXTRA_BYTE_MAP: Record<number, number> = {
+  0x20ac: 0x80,
+  0x201a: 0x82,
+  0x0192: 0x83,
+  0x201e: 0x84,
+  0x2026: 0x85,
+  0x2020: 0x86,
+  0x2021: 0x87,
+  0x02c6: 0x88,
+  0x2030: 0x89,
+  0x0160: 0x8a,
+  0x2039: 0x8b,
+  0x0152: 0x8c,
+  0x017d: 0x8e,
+  0x2018: 0x91,
+  0x2019: 0x92,
+  0x201c: 0x93,
+  0x201d: 0x94,
+  0x2022: 0x95,
+  0x2013: 0x96,
+  0x2014: 0x97,
+  0x02dc: 0x98,
+  0x2122: 0x99,
+  0x0161: 0x9a,
+  0x203a: 0x9b,
+  0x0153: 0x9c,
+  0x017e: 0x9e,
+  0x0178: 0x9f,
+};
+
+function toLikelyUtf8Bytes(value: string): Uint8Array {
+  return Uint8Array.from(Array.from(value), (char) => {
+    const code = char.codePointAt(0) ?? 0x3f;
+    if (code <= 0xff) return code;
+    return CP1252_EXTRA_BYTE_MAP[code] ?? 0x3f;
+  });
+}
+
 function repairMojibake(value: string): string {
-  if (!/[\u00D0\u00D1\u00C3\u00C2\uFFFD]/.test(value)) return value;
+  if (!/[\u00D0\u00D1\u00C3\u00C2\u20AC\u201A-\u201E\u2020-\u2022\u2030\u2122\uFFFD]/.test(value)) {
+    return value;
+  }
+
   try {
-    const bytes = Uint8Array.from(Array.from(value), (char) => char.charCodeAt(0) & 0xff);
-    const decoded = new TextDecoder('utf-8', { fatal: false }).decode(bytes);
-    return /[\u0400-\u04FF]/.test(decoded) || /[A-Za-z]/.test(decoded) ? decoded : value;
+    let current = value;
+    for (let i = 0; i < 3; i += 1) {
+      const decoded = new TextDecoder('utf-8', { fatal: false }).decode(toLikelyUtf8Bytes(current));
+      if (decoded === current) break;
+      current = decoded;
+      if (!/[\u00D0\u00D1\u00C3\u00C2\u20AC\u201A-\u201E\u2020-\u2022\u2030\u2122\uFFFD]/.test(current)) break;
+    }
+    return /[\u0400-\u04FF]/.test(current) || /[A-Za-z]/.test(current) ? current : value;
   } catch {
     return value;
   }

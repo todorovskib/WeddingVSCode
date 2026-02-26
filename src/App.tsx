@@ -45,18 +45,24 @@ const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) =
   return <>{children}</>;
 };
 
+const LanguageRemountBoundary: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const { language } = useI18n();
+  return <React.Fragment key={language}>{children}</React.Fragment>;
+};
+
 export default function App() {
   return (
     <I18nProvider>
       <AuthProvider>
         <WeddingProvider>
           <Router>
-            <LocalePathSync />
-            <ScrollToTop />
-            <NaturalScrollMotion />
-            <DomTranslationFallback />
-            <Navigation />
-            <Routes>
+            <LanguageRemountBoundary>
+              <LocalePathSync />
+              <ScrollToTop />
+              <NaturalScrollMotion />
+              <DomTranslationFallback />
+              <Navigation />
+              <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/:locale" element={<Home />} />
               <Route path="/login" element={<Login />} />
@@ -120,10 +126,11 @@ export default function App() {
                 }
               />
               <Route path="*" element={<Navigate to="/" replace />} />
-            </Routes>
-            <PublicMusicToggle />
-            <PublicFloatingCta />
-            <SiteFooter />
+              </Routes>
+              <PublicMusicToggle />
+              <PublicFloatingCta />
+              <SiteFooter />
+            </LanguageRemountBoundary>
           </Router>
         </WeddingProvider>
       </AuthProvider>

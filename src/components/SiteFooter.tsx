@@ -73,7 +73,7 @@ export const SiteFooter: React.FC = () => {
           <div className="absolute inset-0 flex flex-col justify-center gap-3 px-4 py-3 text-white sm:flex-row sm:items-center sm:justify-between sm:px-6">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/78">WedMKD</p>
-              <p className="mt-1 text-xl font-semibold leading-none sm:text-2xl">Elegant wedding websites, made by hand</p>
+              <p className="mt-1 text-xl font-semibold leading-none sm:text-2xl">{t('Elegant wedding websites, made by hand')}</p>
             </div>
             <div className="flex flex-wrap gap-2">
               <Link to={pathFor('/pricing')} className="btn-flat !border-white/35 !bg-white/92 !text-stone-900 backdrop-blur">{t('Pricing')}</Link>

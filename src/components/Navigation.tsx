@@ -74,7 +74,7 @@ const FlagButton: React.FC<{
 
 export const Navigation: React.FC = () => {
   const { user, logout, token } = useAuth();
-  const { language, setLanguage, t, pathFor } = useI18n();
+  const { language, t, pathFor } = useI18n();
   const navigate = useNavigate();
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -86,8 +86,8 @@ export const Navigation: React.FC = () => {
 
   const switchLanguage = (next: 'en' | 'mk') => {
     if (language === next) return;
-    setLanguage(next);
-    navigate(withLocalePath(basePath || '/', next));
+    setMenuOpen(false);
+    navigate(`${withLocalePath(basePath || '/', next)}${location.search}${location.hash}`);
   };
 
   const handleLogout = () => {
