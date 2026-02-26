@@ -1,7 +1,5 @@
 ﻿import React from 'react';
 import { Link } from 'react-router-dom';
-import { AnnouncementBar } from '../components/marketing/AnnouncementBar';
-import { LogoCloud } from '../components/marketing/LogoCloud';
 import { TestimonialCarousel } from '../components/marketing/TestimonialCarousel';
 import { useI18n } from '../context/I18nContext';
 
@@ -43,10 +41,10 @@ const services = [
   },
   {
     title: 'Tier-Based Samples',
-    description: 'Show couples exactly what Basic, Pro, and Premium sites can look like before choosing.',
+    description: 'Show couples exactly what Basic, Plus, Premium, and Platinum sites can look like before choosing.',
     image: 'https://images.pexels.com/photos/1024993/pexels-photo-1024993.jpeg?auto=compress&cs=tinysrgb&w=1400&h=800&fit=crop',
     accent: 'from-fuchsia-400 to-rose-600',
-    bullets: ['Basic sample', 'Pro sample', 'Premium sample', 'Upgrade prompts'],
+    bullets: ['Basic sample', 'Plus sample', 'Premium sample', 'Platinum sample'],
   },
 ];
 
@@ -103,44 +101,30 @@ const testimonials = [
 ];
 
 export const Services: React.FC = () => {
-  const { t } = useI18n();
+  const { t, pathFor } = useI18n();
   return (
     <div className="app-shell" data-auto-motion>
-      <AnnouncementBar
-        tag="Services"
-        title="Service page expanded with richer sections, visual bundles, and tier-aligned positioning"
-        description="Designed with richer visual density, stronger hierarchy, and premium service presentation."
-        ctaLabel="View Samples"
-        ctaTo="/samples"
-        accentClass="from-violet-400 via-fuchsia-500 to-rose-500"
-      />
-
-      <LogoCloud items={['Planner Studio', 'Venue Atlas', 'Flora Lab', 'Frame House', 'Paper Atelier']} />
-
-      <section className="page-wrap pt-5">
-        <div className="card-surface-strong mesh-panel relative overflow-hidden px-5 py-10 sm:px-8">
-          <div className="orb orb-rose left-[-30px] top-[-20px] h-40 w-40" />
-          <div className="orb orb-sage right-[8%] top-[10%] h-36 w-36 float-reverse" />
-          <div className="relative grid gap-8 lg:grid-cols-[1.08fr_0.92fr]">
-            <div>
-              <p className="section-kicker">{t('Services')}</p>
-              <h1 className="mt-2 text-5xl font-semibold text-stone-900 sm:text-6xl">{t('A full wedding platform service layer')}</h1>
-              <p className="mt-4 max-w-3xl text-sm leading-7 text-stone-600 sm:text-base">
-                {t('WedMKD now presents planning, guest, website, and marketplace capabilities in a more premium, image-led way.')}
-              </p>
-              <div className="mt-6 flex flex-wrap gap-2">
-                <Link to="/samples" className="btn-primary">{t('View Tier Samples')}</Link>
-                <Link to="/collaborations" className="btn-secondary">{t('Collaborations')}</Link>
-                <Link to="/products" className="btn-secondary">{t('Products')}</Link>
-                <Link to="/contact" className="btn-secondary">{t('Contact Us')}</Link>
-              </div>
-            </div>
-            <div className="grid grid-cols-2 gap-3">
-              {services.slice(0, 4).map((service, idx) => (
-                <div key={service.title} className={`image-frame shimmer-card ${idx % 2 === 0 ? 'float-slow' : 'float-reverse'}`}>
-                  <img src={service.image} alt={service.title} className="h-36 w-full object-cover sm:h-44" loading="lazy" />
-                </div>
-              ))}
+      <section className="relative min-h-[52vh] overflow-hidden">
+        <img
+          src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=1800&q=80"
+          alt=""
+          className="absolute inset-0 h-full w-full object-cover"
+          loading="eager"
+          style={{ filter: 'blur(1.2px)', transform: 'scale(1.02)' }}
+        />
+        <div className="absolute inset-0 bg-black/58" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(156,79,70,0.28),transparent_38%),radial-gradient(circle_at_84%_18%,rgba(79,127,118,0.18),transparent_42%)]" />
+        <div className="page-wrap relative flex min-h-[52vh] items-end py-10">
+          <div className="max-w-4xl text-white">
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/74">{t('Services')}</p>
+            <h1 className="mt-3 text-5xl font-semibold leading-[0.96] sm:text-6xl">{t('Custom wedding services, designed by hand')}</h1>
+            <p className="mt-4 max-w-3xl text-sm leading-7 text-white/84 sm:text-base">
+              {t('From invitation pages and RSVP flows to planning tools and premium presentation, every wedding experience is designed to feel personal, elegant, and clear for guests.')}
+            </p>
+            <div className="mt-6 flex flex-wrap gap-2">
+              <Link to={pathFor('/pricing')} className="btn-secondary bg-white/95">{t('Pricing')}</Link>
+              <Link to={pathFor('/samples')} className="btn-secondary bg-white/95">{t('View Samples')}</Link>
+              <Link to={pathFor('/contact')} className="btn-primary">{t('Contact Us')}</Link>
             </div>
           </div>
         </div>
@@ -180,7 +164,7 @@ export const Services: React.FC = () => {
               <p className="section-kicker">{t('Packages')}</p>
               <h2 className="mt-2 text-4xl font-semibold text-stone-900">{t('Service bundles by wedding stage')}</h2>
             </div>
-            <Link to="/samples" className="btn-secondary">{t('Compare via samples')}</Link>
+            <Link to={pathFor('/samples')} className="btn-secondary">{t('Compare via samples')}</Link>
           </div>
           <div className="grid grid-cols-1 gap-4 xl:grid-cols-3">
             {packages.map((pack) => (
@@ -237,10 +221,11 @@ export const Services: React.FC = () => {
                 {t('Open the tier samples to show clients exactly what each plan level looks like in a guest-facing experience.')}
               </p>
               <div className="mt-5 flex flex-wrap gap-2">
-                <Link to="/samples/basic" target="_blank" rel="noopener noreferrer" className="btn-secondary">{t('Basic')}</Link>
-                <Link to="/samples/pro" target="_blank" rel="noopener noreferrer" className="btn-secondary">{t('Pro')}</Link>
-                <Link to="/samples/premium" target="_blank" rel="noopener noreferrer" className="btn-primary">{t('Premium')}</Link>
-                <Link to="/collaborations" className="btn-secondary">{t('Collaborations')}</Link>
+                <Link to={pathFor('/samples/basic')} target="_blank" rel="noopener noreferrer" className="btn-secondary">{t('Basic')}</Link>
+                <Link to={pathFor('/samples/plus')} target="_blank" rel="noopener noreferrer" className="btn-secondary">{t('Plus')}</Link>
+                <Link to={pathFor('/samples/premium')} target="_blank" rel="noopener noreferrer" className="btn-secondary">{t('Premium')}</Link>
+                <Link to={pathFor('/samples/platinum')} target="_blank" rel="noopener noreferrer" className="btn-primary">{t('Platinum')}</Link>
+                <Link to={pathFor('/collaborations')} className="btn-secondary">{t('Collaborations')}</Link>
               </div>
             </div>
             <div className="grid grid-cols-2 gap-3">
@@ -256,8 +241,8 @@ export const Services: React.FC = () => {
 
       <section className="page-wrap pb-12">
         <TestimonialCarousel
-          title="A service page that feels premium and credible"
-          subtitle="Added visual density, color, and section variety closer to leading wedding platforms while keeping your current app architecture."
+          title={t('A service page that feels premium and credible')}
+          subtitle={t('Custom service presentation with clearer structure, richer visuals, and more wedding-first storytelling.')}
           items={testimonials}
           accentClass="from-violet-400 via-fuchsia-500 to-rose-500"
         />

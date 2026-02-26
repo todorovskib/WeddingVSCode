@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useI18n } from '../context/I18nContext';
-import { LogoCloud } from '../components/marketing/LogoCloud';
 
 type LocalizedText = {
   en: string;
@@ -401,12 +400,7 @@ export const Collaborations: React.FC = () => {
 
   return (
     <div className="app-shell" data-auto-motion>
-      <LogoCloud
-        title={language === 'mk' ? 'Категории и партнери за свадбена организација' : 'Wedding planning categories and partner areas'}
-        items={['Venues', 'Bands', 'Photo/Video', 'Decor', 'Invitations', 'Fashion', 'Oldtimers']}
-      />
-
-      <section className="page-wrap pt-4 sm:pt-5">
+      <section className="page-wrap pt-5 sm:pt-6">
         <div className="relative overflow-hidden rounded-[34px] bg-stone-900 shadow-[0_28px_70px_rgba(20,14,12,0.22)]">
           <img src={heroImage} alt="" className="absolute inset-0 h-full w-full object-cover" loading="eager" />
           <div className="absolute inset-0 bg-gradient-to-r from-black/72 via-black/46 to-black/22" />
@@ -427,7 +421,7 @@ export const Collaborations: React.FC = () => {
                 <Link to="/services" className="btn-secondary bg-white/92 px-5 py-3 text-base">
                   {heroCtaSecondary}
                 </Link>
-                <Link to="/products" className="btn-secondary border-white/30 bg-white/10 px-5 py-3 text-base text-white hover:bg-white/20">
+                <Link to="/products" className="btn-secondary border-white/40 bg-white/92 px-5 py-3 text-base text-stone-900 hover:bg-white">
                   {t('Products')}
                 </Link>
               </div>
@@ -577,7 +571,7 @@ export const Collaborations: React.FC = () => {
               <Link to="/contact" className="btn-secondary bg-white/95">
                 {endButtonPrimary}
               </Link>
-              <Link to="/products" className="btn-secondary border-white/30 bg-white/10 text-white hover:bg-white/20">
+              <Link to="/products" className="btn-secondary border-white/40 bg-white/92 text-stone-900 hover:bg-white">
                 {endButtonSecondary}
               </Link>
             </div>
@@ -587,4 +581,3 @@ export const Collaborations: React.FC = () => {
     </div>
   );
 };
-

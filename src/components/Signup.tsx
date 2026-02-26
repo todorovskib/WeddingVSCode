@@ -6,7 +6,7 @@ import { BrandLogo } from './BrandLogo';
 
 export const Signup: React.FC = () => {
   const { signup } = useAuth();
-  const { t } = useI18n();
+  const { t, pathFor } = useI18n();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: '',
@@ -29,7 +29,7 @@ export const Signup: React.FC = () => {
 
     try {
       await signup(formData.email, formData.password, formData.firstName, formData.lastName);
-      navigate('/dashboard');
+      navigate(pathFor('/dashboard'));
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Signup failed');
     } finally {
@@ -42,7 +42,7 @@ export const Signup: React.FC = () => {
       navigate(-1);
       return;
     }
-    navigate('/');
+    navigate(pathFor('/'));
   };
 
   return (
@@ -74,10 +74,10 @@ export const Signup: React.FC = () => {
               <span>{t('Back')} - {t('Home')}</span>
             </button>
 
-            <Link to="/" className="hidden shrink-0 sm:block">
+            <Link to={pathFor('/')} className="hidden shrink-0 sm:block">
               <BrandLogo subtitle={t('Wedding Platform')} />
             </Link>
-            <Link to="/" className="shrink-0 sm:hidden">
+            <Link to={pathFor('/')} className="shrink-0 sm:hidden">
               <BrandLogo compact />
             </Link>
           </div>
@@ -174,7 +174,7 @@ export const Signup: React.FC = () => {
 
                 <p className="mt-6 text-sm text-stone-600">
                   {t('Already registered?')}{' '}
-                  <Link to="/login" className="font-semibold text-rose-700 hover:underline">
+                  <Link to={pathFor('/login')} className="font-semibold text-rose-700 hover:underline">
                     {t('Sign In')}
                   </Link>
                 </p>

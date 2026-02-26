@@ -61,7 +61,7 @@ export const Shop: React.FC = () => {
       <AnnouncementBar
         tag="Shop"
         title="Colorful wedding shop experience with richer visuals and curated categories"
-        description="Image-led merchandising for a premium wedding shop while keeping your live catalog integration."
+        description="Image-led merchandising for a premium wedding shop with curated categories and a cleaner browsing experience."
         ctaLabel="Browse Products Page"
         ctaTo="/products"
         accentClass="from-amber-400 via-rose-500 to-violet-600"
@@ -90,7 +90,7 @@ export const Shop: React.FC = () => {
               <div className="mt-6 grid grid-cols-3 gap-3">
                 {[
                   ['Curated', 'Collections'],
-                  ['Live', 'Catalog'],
+                  ['Curated', 'Products'],
                   ['Local', 'Wedding focus'],
                 ].map(([value, label]) => (
                   <div key={value + label} className="rounded-xl border border-stone-200/80 bg-white/82 p-3 text-center">
@@ -160,10 +160,10 @@ export const Shop: React.FC = () => {
         <div className="card-surface p-5 sm:p-6">
           <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <p className="section-kicker">{t('Live Catalog')}</p>
+              <p className="section-kicker">{t('Shop Collection')}</p>
               <h2 className="mt-2 text-4xl font-semibold text-stone-900">{t('Shop products and cart summary')}</h2>
               <p className="mt-2 text-sm text-stone-600">
-                {t('Keeps the existing catalog and local cart behavior, now in a richer storefront context.')}
+                {t('Browse products and build a quick cart summary in a cleaner, wedding-first storefront layout.')}
               </p>
             </div>
             <Link to="/products" className="btn-secondary">{t('Open Marketplace View')}</Link>

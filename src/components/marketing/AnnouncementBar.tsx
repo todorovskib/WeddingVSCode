@@ -24,7 +24,7 @@ export const AnnouncementBar: React.FC<AnnouncementBarProps> = ({
   dismissible = true,
 }) => {
   const { pathname } = useLocation();
-  const { t } = useI18n();
+  const { t, pathFor } = useI18n();
   const storageKey = useMemo(
     () => `wedmkd-announcement-dismissed:${pathname}:${title}`,
     [pathname, title]
@@ -54,7 +54,7 @@ export const AnnouncementBar: React.FC<AnnouncementBarProps> = ({
           <div className="flex items-center gap-2">
             {ctaLabel && ctaTo && (
               <Link
-                to={ctaTo}
+                to={pathFor(ctaTo)}
                 className="btn-secondary shrink-0"
                 target={ctaNewTab ? '_blank' : undefined}
                 rel={ctaNewTab ? 'noopener noreferrer' : undefined}

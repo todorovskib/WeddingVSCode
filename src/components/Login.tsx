@@ -6,7 +6,7 @@ import { BrandLogo } from './BrandLogo';
 
 export const Login: React.FC = () => {
   const { login } = useAuth();
-  const { t } = useI18n();
+  const { t, pathFor } = useI18n();
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -20,7 +20,7 @@ export const Login: React.FC = () => {
 
     try {
       await login(email, password);
-      navigate('/dashboard');
+      navigate(pathFor('/dashboard'));
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Login failed');
     } finally {
@@ -33,7 +33,7 @@ export const Login: React.FC = () => {
       navigate(-1);
       return;
     }
-    navigate('/');
+    navigate(pathFor('/'));
   };
 
   return (
@@ -65,10 +65,10 @@ export const Login: React.FC = () => {
               <span>{t('Back')} - {t('Home')}</span>
             </button>
 
-            <Link to="/" className="hidden shrink-0 sm:block">
+            <Link to={pathFor('/')} className="hidden shrink-0 sm:block">
               <BrandLogo subtitle={t('Wedding Platform')} />
             </Link>
-            <Link to="/" className="shrink-0 sm:hidden">
+            <Link to={pathFor('/')} className="shrink-0 sm:hidden">
               <BrandLogo compact />
             </Link>
           </div>
@@ -165,7 +165,7 @@ export const Login: React.FC = () => {
 
                 <p className="mt-6 text-sm text-stone-600">
                   {t('Need an account?')}{' '}
-                  <Link to="/signup" className="font-semibold text-rose-700 hover:underline">
+                  <Link to={pathFor('/signup')} className="font-semibold text-rose-700 hover:underline">
                     {t('Create one')}
                   </Link>
                 </p>

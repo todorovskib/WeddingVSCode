@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useI18n } from '../../context/I18nContext';
+import { stripLocaleFromPathname } from '../../i18n/localePath';
 
 export const PublicFloatingCta: React.FC = () => {
   const location = useLocation();
-  const { t } = useI18n();
+  const { t, pathFor } = useI18n();
   const [dismissed, setDismissed] = useState(false);
-  const hiddenRoutes = ['/login', '/signup', '/dashboard'];
+  const basePath = stripLocaleFromPathname(location.pathname);
+  const hiddenRoutes = ['/login', '/signup', '/dashboard', '/samples', '/pricing'];
   const hidden =
-    hiddenRoutes.includes(location.pathname) ||
-    location.pathname.startsWith('/wedding/');
+    hiddenRoutes.includes(basePath) ||
+    basePath.startsWith('/samples/') ||
+    basePath.startsWith('/wedding/');
 
   useEffect(() => {
     const value = window.localStorage.getItem('wedmkd-floating-cta-dismissed');
@@ -44,8 +47,8 @@ export const PublicFloatingCta: React.FC = () => {
             {t('Compare tier sample pages, view services, or contact us for a premium design direction.')}
           </p>
           <div className="mt-3 flex flex-wrap gap-2">
-            <Link to="/samples" className="btn-primary">{t('Samples')}</Link>
-            <Link to="/contact" className="btn-secondary">{t('Contact')}</Link>
+            <Link to={pathFor('/pricing')} className="btn-primary">{t('Pricing')}</Link>
+            <Link to={pathFor('/contact')} className="btn-secondary">{t('Contact')}</Link>
           </div>
         </div>
       </div>

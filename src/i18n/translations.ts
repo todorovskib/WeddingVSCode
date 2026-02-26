@@ -468,12 +468,103 @@ const mk: Dictionary = {
   'YouTube': 'YouTube',
 };
 
-const mkEntriesByLength = Object.entries(mk).sort((a, b) => b[0].length - a[0].length);
+const mkOverrides: Dictionary = {
+  'Invitations, wedding websites, and planning in one experience':
+    '\u041f\u043e\u043a\u0430\u043d\u0438, \u0441\u0432\u0430\u0434\u0431\u0435\u043d\u0438 \u0432\u0435\u0431-\u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0438 \u0438 \u043f\u043b\u0430\u043d\u0438\u0440\u0430\u045a\u0435 \u0432\u043e \u0435\u0434\u043d\u043e \u0438\u0441\u043a\u0443\u0441\u0442\u0432\u043e',
+  'Everything important stays easy to reach below: links, pricing, contact, and legal pages.':
+    '\u0421\u0451 \u0432\u0430\u0436\u043d\u043e \u0435 \u043b\u0435\u0441\u043d\u043e \u0434\u043e\u0441\u0442\u0430\u043f\u043d\u043e \u043f\u043e\u0434\u043e\u043b\u0443: \u043b\u0438\u043d\u043a\u043e\u0432\u0438, \u0446\u0435\u043d\u043e\u0432\u043d\u0438\u043a, \u043a\u043e\u043d\u0442\u0430\u043a\u0442 \u0438 \u043f\u0440\u0430\u0432\u043d\u0438 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0438.',
+  'A smoother, more complete public experience with invitations, pricing, products, and collaboration categories.':
+    '\u041f\u043e\u043c\u0430\u0437\u043d\u043e \u0438 \u043f\u043e\u043a\u043e\u043c\u043f\u043b\u0435\u0442\u043d\u043e \u0458\u0430\u0432\u043d\u043e \u0438\u0441\u043a\u0443\u0441\u0442\u0432\u043e \u0441\u043e \u043f\u043e\u043a\u0430\u043d\u0438, \u0446\u0435\u043d\u043e\u0432\u043d\u0438\u043a, \u043f\u0440\u043e\u0438\u0437\u0432\u043e\u0434\u0438 \u0438 \u043a\u0430\u0442\u0435\u0433\u043e\u0440\u0438\u0438 \u0437\u0430 \u0441\u043e\u0440\u0430\u0431\u043e\u0442\u043d\u0438\u0446\u0438.',
+  'Everything important stays easy to reach below: links, samples, contact, and legal pages.':
+    '\u0421\u0451 \u0432\u0430\u0436\u043d\u043e \u0435 \u043b\u0435\u0441\u043d\u043e \u0434\u043e\u0441\u0442\u0430\u043f\u043d\u043e \u043f\u043e\u0434\u043e\u043b\u0443: \u043b\u0438\u043d\u043a\u043e\u0432\u0438, \u043f\u0440\u0438\u043c\u0435\u0440\u0438, \u043a\u043e\u043d\u0442\u0430\u043a\u0442 \u0438 \u043f\u0440\u0430\u0432\u043d\u0438 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0438.',
+  'Up to': '\u0414\u043e',
+  'guests': '\u0433\u043e\u0441\u0442\u0438',
+  'Included': '\u0412\u043a\u043b\u0443\u0447\u0435\u043d\u043e',
+  'Preview': '\u041f\u0440\u0435\u0433\u043b\u0435\u0434',
+  'All feature previews': '\u0421\u0438\u0442\u0435 \u043f\u0440\u0435\u0433\u043b\u0435\u0434\u0438 \u043d\u0430 \u0444\u0443\u043d\u043a\u0446\u0438\u0438',
+  'Included Tabs': '\u0412\u043a\u043b\u0443\u0447\u0435\u043d\u0438 \u0442\u0430\u0431\u043e\u0432\u0438',
+  'Complete feature showcase': '\u041a\u043e\u043c\u043f\u043b\u0435\u0442\u0435\u043d \u043f\u0440\u0438\u043a\u0430\u0437 \u043d\u0430 \u0444\u0443\u043d\u043a\u0446\u0438\u0438',
+  'Samples': '\u041f\u0440\u0438\u043c\u0435\u0440\u0438',
+  'Choose a package for your wedding invitation and website':
+    '\u0418\u0437\u0431\u0435\u0440\u0435\u0442\u0435 \u043f\u0430\u043a\u0435\u0442 \u0437\u0430 \u0432\u0430\u0448\u0430\u0442\u0430 \u0441\u0432\u0430\u0434\u0431\u0435\u043d\u0430 \u043f\u043e\u043a\u0430\u043d\u0430 \u0438 \u0432\u0435\u0431-\u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0430',
+  'Pricing is paired with sample pages so you can instantly see how each plan level looks and feels.':
+    '\u0426\u0435\u043d\u043e\u0432\u043d\u0438\u043a\u043e\u0442 \u0435 \u043f\u043e\u0432\u0440\u0437\u0430\u043d \u0441\u043e \u043f\u0440\u0438\u043c\u0435\u0440-\u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0438\u0442\u0435, \u0437\u0430 \u0432\u0435\u0434\u043d\u0430\u0448 \u0434\u0430 \u0432\u0438\u0434\u0438\u0442\u0435 \u043a\u0430\u043a\u043e \u0438\u0437\u0433\u043b\u0435\u0434\u0430 \u0438 \u0441\u0435 \u0447\u0443\u0432\u0441\u0442\u0432\u0443\u0432\u0430 \u0441\u0435\u043a\u043e\u0435 \u043d\u0438\u0432\u043e.',
+  'What you get with each package':
+    '\u0428\u0442\u043e \u0434\u043e\u0431\u0438\u0432\u0430\u0442\u0435 \u0441\u043e \u0441\u0435\u043a\u043e\u0458 \u043f\u0430\u043a\u0435\u0442',
+  'Frequently asked questions':
+    '\u0427\u0435\u0441\u0442\u043e \u043f\u043e\u0441\u0442\u0430\u0432\u0443\u0432\u0430\u043d\u0438 \u043f\u0440\u0430\u0448\u0430\u045a\u0430',
+  'Pricing that is easier to understand':
+    '\u0426\u0435\u043d\u043e\u0432\u043d\u0438\u043a \u0448\u0442\u043e \u0435 \u043f\u043e\u043b\u0435\u0441\u0435\u043d \u0437\u0430 \u0440\u0430\u0437\u0431\u0438\u0440\u0430\u045a\u0435',
+  'Sample pages + pricing + contact in one clear flow.':
+    '\u041f\u0440\u0438\u043c\u0435\u0440-\u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0438 + \u0446\u0435\u043d\u043e\u0432\u043d\u0438\u043a + \u043a\u043e\u043d\u0442\u0430\u043a\u0442 \u0432\u043e \u0435\u0434\u0435\u043d \u0458\u0430\u0441\u0435\u043d \u0442\u0435\u043a.',
+  'Tier-based sample pages for a clear visual difference':
+    '\u041f\u0440\u0438\u043c\u0435\u0440-\u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0438 \u043f\u043e \u043f\u0430\u043a\u0435\u0442 \u0437\u0430 \u0458\u0430\u0441\u043d\u0430 \u0432\u0438\u0437\u0443\u0435\u043b\u043d\u0430 \u0440\u0430\u0437\u043b\u0438\u043a\u0430',
+  'Guest experience with RSVP and rich tabs':
+    '\u0413\u043e\u0441\u0442\u0438\u043d\u0441\u043a\u043e \u0438\u0441\u043a\u0443\u0441\u0442\u0432\u043e \u0441\u043e RSVP \u0438 \u0431\u043e\u0433\u0430\u0442\u0438 \u0442\u0430\u0431\u043e\u0432\u0438',
+  'Planning features connected to the backend':
+    '\u041f\u043b\u0430\u043d\u0438\u0440\u0430\u0447\u043a\u0438 \u0444\u0443\u043d\u043a\u0446\u0438\u0438 \u043f\u043e\u0432\u0440\u0437\u0430\u043d\u0438 \u0441\u043e backend',
+  'Collaboration categories and invitation direction':
+    '\u041a\u0430\u0442\u0435\u0433\u043e\u0440\u0438\u0438 \u0437\u0430 \u0441\u043e\u0440\u0430\u0431\u043e\u0442\u043d\u0438\u0446\u0438 \u0438 \u043d\u0430\u0441\u043e\u043a\u0430 \u0437\u0430 \u043f\u043e\u043a\u0430\u043d\u0438',
+  'Plus': 'Plus',
+  'Platinum': 'Platinum',
+  'Plus Sample': 'Plus пример',
+  'Platinum Sample': 'Platinum пример',
+  'Real wedding sample pages by tier': 'Реални свадбени пример-страници по пакет',
+  'Open each sample in a new tab to see a complete wedding website experience. Every tier is designed as a real guest-facing page, not a feature checklist.':
+    'Отворете го секој пример во нов таб за да видите комплетно свадбено веб-искуство. Секој пакет е дизајниран како реална страница за гости, а не како листа на функции.',
+  'The tier samples make pricing easier to explain because couples see the difference instantly in a real page.':
+    'Примерите по пакети го прават ценовникот полесен за објаснување бидејќи паровите веднаш ја гледаат разликата на реална страница.',
+  'Beautiful visual flow, much calmer than before, and the invitation pages feel personal from the first screen.':
+    'Убав визуелен тек, многу посмирен од порано, а страниците за покани се чувствуваат лично уште од првиот екран.',
+  'Guest clarity': 'Јасност за гостите',
+  'More premium feel': 'Попремиум впечаток',
+  'Choose the look': 'Изберете изглед',
+  'Collect responses': 'Соберете одговори',
+  'Pick the style that matches your wedding mood and edit it to feel like you.':
+    'Изберете стил што одговара на атмосферата на свадбата и прилагодете го да биде ваш.',
+  'Guests RSVP in one flow, and you keep control of the list without endless messages.':
+    'Гостите потврдуваат во еден тек, а вие ја контролирате листата без бескрајни пораки.',
+  'Timeline, venue details, FAQ, and gallery live in a polished wedding experience.':
+    'Временската линија, деталите за локацијата, ЧПП и галеријата живеат во едно полирано свадбено искуство.',
+  'This feels like a real wedding brand, not a generic website builder. Guests immediately understood where to click.':
+    'Ова се чувствува како вистински свадбен бренд, а не како генерички градител на сајтови. Гостите веднаш знаеја каде да кликнат.',
+  'Planner Studio': 'Планер студио',
+  'Internal design review': 'Внатрешна дизајн ревизија',
+  'Wedding Invitation': 'Свадбена покана',
+  'Couple wedding photo session': 'Фотосесија на пар',
+  'Your day': 'Вашиот ден',
+  'Gentle design, clear details, calm organization': 'Нежен дизајн, јасни детали, мирна организација',
+  'How it works': 'Како функционира',
+  'More wedding, less chaos': 'Повеќе свадба, помалку хаос',
+  'We focus on what matters most: a beautiful invitation, guest confirmations, and one clear place where all the details live together.':
+    'Се фокусираме на најважното: убава покана, потврди од гостите и едно јасно место каде живеат сите детали.',
+  'How it feels for couples': 'Како се чувствува за паровите',
+  'Less noise, clearer flow, and a stronger wedding feeling.': 'Помалку шум, појасен тек и посилно свадбено чувство.',
+  'Next step': 'Следен чекор',
+  'Ready for your invitation?': 'Подготвени сте за вашата покана?',
+  'Start from a sample you love and shape it for your day.': 'Започнете од пример што ви се допаѓа и обликувајте го за вашиот ден.',
+  'UX pass': 'UX ревизија',
+};
+
+const mkLookup: Dictionary = { ...mk, ...mkOverrides };
+
+const mkEntriesByLength = Object.entries(mkLookup).sort((a, b) => b[0].length - a[0].length);
+
+function repairMojibake(value: string): string {
+  if (!/[\u00D0\u00D1\u00C3\u00C2\uFFFD]/.test(value)) return value;
+  try {
+    const bytes = Uint8Array.from(Array.from(value), (char) => char.charCodeAt(0) & 0xff);
+    const decoded = new TextDecoder('utf-8', { fatal: false }).decode(bytes);
+    return /[\u0400-\u04FF]/.test(decoded) || /[A-Za-z]/.test(decoded) ? decoded : value;
+  } catch {
+    return value;
+  }
+}
 
 export function translateText(language: AppLanguage, input: string): string {
   if (language === 'en') return input;
-  const exact = mk[input];
-  if (exact) return exact;
+  const exact = mkLookup[input];
+  if (exact) return repairMojibake(exact);
 
   let out = input;
   for (const [key, value] of mkEntriesByLength) {
@@ -481,5 +572,5 @@ export function translateText(language: AppLanguage, input: string): string {
     if (!out.includes(key)) continue;
     out = out.split(key).join(value);
   }
-  return out;
+  return repairMojibake(out);
 }

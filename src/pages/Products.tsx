@@ -1,8 +1,6 @@
 ﻿import React, { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ProductCatalog } from '../components/ProductCatalog';
 import { AnnouncementBar } from '../components/marketing/AnnouncementBar';
-import { LogoCloud } from '../components/marketing/LogoCloud';
 import { TestimonialCarousel } from '../components/marketing/TestimonialCarousel';
 import { useI18n } from '../context/I18nContext';
 
@@ -126,8 +124,6 @@ export const ProductsPage: React.FC = () => {
         accentClass="from-sky-400 via-violet-500 to-rose-500"
       />
 
-      <LogoCloud title="Example partner categories and storefront collaborators" items={['Flora Atelier', 'Paper House', 'Frame & Film', 'Velvet Decor', 'Cake Studio']} />
-
       <section className="page-wrap pt-5">
         <div className="card-surface-strong mesh-panel relative overflow-hidden px-5 py-10 sm:px-8">
           <div className="orb orb-rose left-[-24px] top-[10%] h-36 w-36" />
@@ -139,7 +135,7 @@ export const ProductsPage: React.FC = () => {
                 {t('Colorful marketplace experience with premium product storytelling')}
               </h1>
               <p className="mt-4 max-w-3xl text-sm leading-7 text-stone-600">
-                {t('This page uses richer imagery, collection cards, and vendor-oriented sections while preserving your live product catalog and filters.')}
+                {t('This page uses richer imagery, collection cards, and vendor-oriented sections to present products and partnerships in a more curated, premium way.')}
               </p>
               <div className="mt-6 flex flex-wrap gap-2">
                 <Link to="/contact" className="btn-primary">{t('Partner With Us')}</Link>
@@ -151,7 +147,7 @@ export const ProductsPage: React.FC = () => {
                 {[
                   ['4+', 'Curated groups'],
                   ['Vendor', 'Spotlights'],
-                  ['Live', 'Catalog data'],
+                  ['Curated', 'Showcase'],
                 ].map(([value, label]) => (
                   <div key={value + label} className="rounded-xl border border-stone-200/80 bg-white/80 p-3 text-center">
                     <p className="text-lg font-semibold text-stone-900">{value}</p>
@@ -246,46 +242,37 @@ export const ProductsPage: React.FC = () => {
       </section>
 
       <section className="page-wrap section-gap">
-        <div className="grid gap-5 lg:grid-cols-[1.1fr_0.9fr]">
-          <div className="card-surface p-5 sm:p-6">
-            <h2 className="text-4xl font-semibold text-stone-900">{t('Live Product Catalog')}</h2>
-            <p className="mt-2 text-sm text-stone-600">
-              {t('This keeps your real catalog endpoint integration and cart summary behavior, now wrapped in a richer marketplace-oriented page.')}
+        <div className="grid gap-5 lg:grid-cols-[0.95fr_1.05fr]">
+          <div className="card-surface-strong p-5 sm:p-6">
+            <p className="section-kicker">{t('Vendor Spotlights')}</p>
+            <h3 className="mt-2 text-3xl font-semibold text-stone-900">{t('Review-ready partner cards')}</h3>
+            <p className="mt-2 text-sm leading-6 text-stone-600">
+              {t('Use these sections to present hand-selected studios, artisans, and wedding collaborators in a more editorial way.')}
             </p>
-            <div className="mt-4">
-              <ProductCatalog />
-            </div>
-          </div>
-
-          <div className="space-y-5">
-            <div className="card-surface-strong p-5 sm:p-6">
-              <p className="section-kicker">{t('Vendor Spotlights')}</p>
-              <h3 className="mt-2 text-3xl font-semibold text-stone-900">{t('Review-ready partner cards')}</h3>
-              <div className="mt-4 space-y-3">
-                {vendorSpotlights.map((vendor) => (
-                  <div key={vendor.name} className="rounded-xl border border-stone-200/80 bg-white/85 p-4">
-                    <div className="flex flex-wrap items-center justify-between gap-2">
-                      <div>
-                        <p className="font-semibold text-stone-900">{t(vendor.name)}</p>
-                        <p className="text-xs uppercase tracking-[0.14em] text-stone-500">{t(vendor.category)}</p>
-                      </div>
-                      <div className={`rounded-full bg-gradient-to-r ${vendor.accent} px-2.5 py-1 text-xs font-semibold text-white`}>
-                        {vendor.rating} ({vendor.reviews})
-                      </div>
+            <div className="mt-4 space-y-3">
+              {vendorSpotlights.map((vendor) => (
+                <div key={vendor.name} className="rounded-xl border border-stone-200/80 bg-white/85 p-4">
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <div>
+                      <p className="font-semibold text-stone-900">{t(vendor.name)}</p>
+                      <p className="text-xs uppercase tracking-[0.14em] text-stone-500">{t(vendor.category)}</p>
+                    </div>
+                    <div className={`rounded-md bg-gradient-to-r ${vendor.accent} px-2.5 py-1 text-xs font-semibold text-white`}>
+                      {vendor.rating} ({vendor.reviews})
                     </div>
                   </div>
-                ))}
-              </div>
-              <Link to="/contact" className="btn-primary mt-4 w-full">{t('Become a Partner')}</Link>
-            </div>
-
-            <div className="grid grid-cols-2 gap-3">
-              {showcaseProducts.map((item, idx) => (
-                <div key={`${item.id}-${idx}`} className={`image-frame hover-lift ${idx === 0 ? 'col-span-2' : ''}`}>
-                  <img src={item.image} alt={`${item.title} visual`} className={`w-full object-cover ${idx === 0 ? 'h-44' : 'h-28'}`} loading="lazy" />
                 </div>
               ))}
             </div>
+            <Link to="/contact" className="btn-primary mt-4 w-full">{t('Become a Partner')}</Link>
+          </div>
+
+          <div className="grid grid-cols-2 gap-3">
+            {showcaseProducts.map((item, idx) => (
+              <div key={`${item.id}-${idx}`} className={`image-frame hover-lift ${idx === 0 ? 'col-span-2' : ''}`}>
+                <img src={item.image} alt={`${item.title} visual`} className={`w-full object-cover ${idx === 0 ? 'h-52' : 'h-36'}`} loading="lazy" />
+              </div>
+            ))}
           </div>
         </div>
       </section>
