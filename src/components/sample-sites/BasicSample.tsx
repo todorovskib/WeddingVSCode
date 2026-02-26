@@ -1,8 +1,10 @@
 ﻿import React, { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { SampleFooter, onSampleImageError, sampleSectionMotion } from './SampleShared';
+import { useI18n } from '../../context/I18nContext';
 
 export const BasicSampleSite: React.FC = () => {
+  const { t } = useI18n();
   const [rsvpOpen, setRsvpOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [guestName, setGuestName] = useState('');
@@ -81,6 +83,17 @@ export const BasicSampleSite: React.FC = () => {
                 <p className="text-base font-semibold tracking-[0.06em]">Restaurant Park by Ragusa</p>
                 <p className="text-sm font-semibold uppercase tracking-[0.16em]">Saturday · 18 October 2026</p>
                 <p className="text-sm uppercase tracking-[0.16em]">Guest arrival · 18:30</p>
+                <div className="pt-2">
+                  <a
+                    href="https://www.google.com/maps/search/?api=1&query=Restaurant+Park+Skopje"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center border border-[#d9c1ac] bg-white/92 px-3.5 py-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#8c5a45] transition hover:bg-white"
+                    style={{ borderRadius: 6 }}
+                  >
+                    {t('Open on map')}
+                  </a>
+                </div>
               </div>
 
               <div className="mx-auto mt-7 grid max-w-xs grid-cols-2 gap-4 text-[#b29680]">
@@ -172,3 +185,4 @@ export const BasicSampleSite: React.FC = () => {
     </div>
   );
 };
+

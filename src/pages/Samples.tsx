@@ -4,13 +4,6 @@ import { SAMPLE_TIERS, type SampleTierMeta } from '../data/sampleTierCatalog';
 import { useI18n } from '../context/I18nContext';
 import { onSampleImageError } from '../components/sample-sites/SampleShared';
 
-function tierBuildLabel(tier: SampleTierMeta): string {
-  if (tier.id === 'basic') return 'Basic';
-  if (tier.id === 'plus') return 'Basic +';
-  if (tier.id === 'premium') return 'Plus +';
-  return 'Premium +';
-}
-
 function includesPrevLabel(tier: SampleTierMeta): { prefix: string; badge?: string } {
   if (tier.id === 'basic') return { prefix: 'Standalone invite experience' };
   if (tier.id === 'plus') return { prefix: 'Everything in', badge: 'Basic' };
@@ -51,11 +44,6 @@ export const Samples: React.FC = () => {
                 <div className="relative h-40 sm:h-48">
                   <img src={tier.previewImages[0] || tier.heroImage} alt={`${tier.name} sample preview`} onError={onSampleImageError} className="h-full w-full object-cover" loading="lazy" />
                   <div className={`absolute inset-0 bg-gradient-to-t ${tier.accent} opacity-20`} />
-                  <div className="absolute inset-x-0 top-3 flex justify-center">
-                    <span className="inline-flex border border-white/25 bg-black/45 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-white backdrop-blur" style={{ borderRadius: 6 }}>
-                      {t(tierBuildLabel(tier))}
-                    </span>
-                  </div>
                 </div>
               </div>
             ))}
@@ -73,11 +61,6 @@ export const Samples: React.FC = () => {
                   <img src={tier.heroImage} alt={`${tier.name} sample hero`} onError={onSampleImageError} className="h-52 w-full object-cover" loading="lazy" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
                   <div className={`absolute inset-0 bg-gradient-to-r ${tier.accent} opacity-20`} />
-                  <div className="absolute inset-x-0 top-3 flex justify-center">
-                    <span className="inline-flex items-center border border-white/30 bg-black/45 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-white backdrop-blur" style={{ borderRadius: 6 }}>
-                      {t(tierBuildLabel(tier))}
-                    </span>
-                  </div>
                   <div className="absolute inset-x-0 bottom-0 p-4 text-white">
                     <p className="text-xs font-semibold uppercase tracking-[0.14em] text-white/75">{t(tier.name)}</p>
                     <p className="mt-1 text-2xl font-semibold leading-none">{t(tier.label)}</p>

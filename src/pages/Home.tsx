@@ -44,12 +44,6 @@ export const Home: React.FC = () => {
   const navigate = useNavigate();
   const { t, pathFor } = useI18n();
   const hasToken = Boolean(localStorage.getItem('token'));
-  const buildLabels: Record<string, string> = {
-    basic: 'Basic',
-    plus: 'Basic +',
-    premium: 'Plus +',
-    platinum: 'Premium +',
-  };
 
   return (
     <div className="app-shell" data-auto-motion>
@@ -172,11 +166,6 @@ export const Home: React.FC = () => {
                     loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/58 to-transparent" />
-                  <div className="absolute inset-x-0 top-3 flex justify-center">
-                    <span className="inline-flex items-center border border-white/35 bg-black/45 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-white backdrop-blur" style={{ borderRadius: 6 }}>
-                      {t(buildLabels[tier.id] ?? tier.name)}
-                    </span>
-                  </div>
                   <div className="absolute inset-x-0 bottom-0 p-4 text-white">
                     <div className={`inline-flex rounded-full bg-gradient-to-r ${tier.accent} px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-white`}>
                       {t(tier.name)}

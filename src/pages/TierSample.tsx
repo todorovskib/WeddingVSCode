@@ -6,6 +6,7 @@ import { BasicSampleSite } from '../components/sample-sites/BasicSample';
 import { PlusSampleSite } from '../components/sample-sites/PlusSample';
 import { PremiumSampleSite } from '../components/sample-sites/PremiumSample';
 import { PlatinumSampleSite } from '../components/sample-sites/PlatinumSample';
+import { SampleMusicToggle } from '../components/sample-sites/SampleMusicToggle';
 import '../styles/sample-sites.css';
 
 function normalizeTierParam(raw: string | undefined): SampleTierId | null {
@@ -46,10 +47,17 @@ export const TierSample: React.FC = () => {
   if (!normalizedTier) return <SampleNotFound />;
 
   void SAMPLE_TIER_BY_ID[normalizedTier];
+  let content: React.ReactNode = null;
+  if (normalizedTier === 'basic') content = <BasicSampleSite />;
+  else if (normalizedTier === 'plus') content = <PlusSampleSite />;
+  else if (normalizedTier === 'premium') content = <PremiumSampleSite page={page} />;
+  else if (normalizedTier === 'platinum') content = <PlatinumSampleSite page={page} />;
+  else content = <SampleNotFound />;
 
-  if (normalizedTier === 'basic') return <BasicSampleSite />;
-  if (normalizedTier === 'plus') return <PlusSampleSite />;
-  if (normalizedTier === 'premium') return <PremiumSampleSite page={page} />;
-  if (normalizedTier === 'platinum') return <PlatinumSampleSite page={page} />;
-  return <SampleNotFound />;
+  return (
+    <>
+      {content}
+      {normalizedTier !== 'basic' ? <SampleMusicToggle /> : null}
+    </>
+  );
 };

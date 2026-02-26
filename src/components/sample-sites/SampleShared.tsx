@@ -164,7 +164,7 @@ export const SampleFooter: React.FC<{ title: string; subtitle: string; toneClass
   subtitle,
   toneClass,
 }) => {
-  const { pathFor } = useI18n();
+  const { pathFor, t } = useI18n();
 
   return (
     <div className="mt-12 px-4 pb-8 sm:px-6 lg:px-8">
@@ -172,16 +172,16 @@ export const SampleFooter: React.FC<{ title: string; subtitle: string; toneClass
         <div className="border border-stone-300/80 bg-[#f5efe3] p-4 shadow-[0_12px_24px_rgba(28,18,13,0.06)]" style={{ borderRadius: 8 }}>
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div className={cx('min-w-0', toneClass)}>
-              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-stone-500">WedMKD sample controls (not part of the couple page)</p>
-              <p className="mt-2 text-base font-semibold">{title}</p>
-              <p className="mt-1 text-sm opacity-80">{subtitle}</p>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-stone-500">{t('WedMKD sample controls (not part of the couple page)')}</p>
+              <p className="mt-2 text-base font-semibold">{t(title)}</p>
+              <p className="mt-1 text-sm opacity-80">{t(subtitle)}</p>
             </div>
             <div className="flex flex-wrap gap-2">
               <Link to={pathFor('/pricing')} className="sample-btn sample-btn-secondary">
-                Back to pricing
+                {t('Back to pricing')}
               </Link>
               <Link to={pathFor('/contact')} className="sample-btn sample-btn-primary">
-                Contact WedMKD
+                {t('Contact WedMKD')}
               </Link>
             </div>
           </div>

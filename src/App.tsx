@@ -22,10 +22,12 @@ import { CookiePolicy } from './pages/CookiePolicy';
 import { Navigation } from './components/Navigation';
 import { SiteFooter } from './components/SiteFooter';
 import { PublicFloatingCta } from './components/marketing/PublicFloatingCta';
+import { PublicMusicToggle } from './components/marketing/PublicMusicToggle';
 import { I18nProvider } from './context/I18nContext';
 import { ScrollToTop } from './components/ScrollToTop';
 import { NaturalScrollMotion } from './components/NaturalScrollMotion';
 import { LocalePathSync } from './components/LocalePathSync';
+import { DomTranslationFallback } from './components/DomTranslationFallback';
 import { getLocaleSegmentFromPathname, segmentToLanguage, withLocalePath } from './i18n/localePath';
 import { useI18n } from './context/I18nContext';
 
@@ -52,6 +54,7 @@ export default function App() {
             <LocalePathSync />
             <ScrollToTop />
             <NaturalScrollMotion />
+            <DomTranslationFallback />
             <Navigation />
             <Routes>
               <Route path="/" element={<Home />} />
@@ -118,6 +121,7 @@ export default function App() {
               />
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
+            <PublicMusicToggle />
             <PublicFloatingCta />
             <SiteFooter />
           </Router>

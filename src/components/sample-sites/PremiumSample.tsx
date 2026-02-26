@@ -126,6 +126,7 @@ const PremiumHero: React.FC<{
   page: PremiumPageKey;
   toPath: (page: PremiumPageKey) => string;
 }> = ({ page, toPath }) => {
+  const { t } = useI18n();
   const active = badgeForPremium(page);
 
   return (
@@ -157,6 +158,14 @@ const PremiumHero: React.FC<{
                   <Link to={toPath('rsvp')} className="sample-btn sample-btn-primary">RSVP</Link>
                   <Link to={toPath('timeline')} className="sample-btn sample-btn-secondary">Timeline</Link>
                   <Link to={toPath('travel')} className="sample-btn sample-btn-secondary">Travel</Link>
+                  <a
+                    href="https://www.google.com/maps/search/?api=1&query=Olive+Estate+Skopje"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="sample-btn sample-btn-secondary"
+                  >
+                    {t('Open on map')}
+                  </a>
                 </div>
               </div>
             </div>

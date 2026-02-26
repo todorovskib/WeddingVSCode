@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { CalendarDays, Clock3, Heart, MapPin } from 'lucide-react';
 import { SampleFooter } from './SampleShared';
+import { useI18n } from '../../context/I18nContext';
 
 type PlusRsvpFormState = {
   name: string;
@@ -244,6 +245,7 @@ const PlusEnvelopeIntro: React.FC<{ guestName?: string; onOpen: () => void }> = 
 };
 
 export const PlusSampleSite: React.FC = () => {
+  const { t } = useI18n();
   const [opened, setOpened] = useState(false);
   const [formData, setFormData] = useState<PlusRsvpFormState>({
     name: '',
@@ -291,6 +293,16 @@ export const PlusSampleSite: React.FC = () => {
               <p className="text-xl sm:text-2xl sample-font-scriptlike">Are getting married!</p>
               <p className="text-lg sm:text-xl sample-font-scriptlike">September 14, 2026</p>
               <p className="text-base sm:text-lg sample-font-scriptlike">Restaurant Park, Skopje</p>
+              <div className="pt-2">
+                <a
+                  href="https://www.google.com/maps/search/?api=1&query=Restaurant+Park+Skopje"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="sample-btn sample-btn-secondary !px-4 !py-2 text-xs"
+                >
+                  {t('Open on map')}
+                </a>
+              </div>
             </div>
           </motion.div>
         </div>

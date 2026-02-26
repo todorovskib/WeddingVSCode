@@ -18,9 +18,7 @@ export const I18nProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [language, setLanguageState] = useState<AppLanguage>(() => {
     const stored = window.localStorage.getItem(STORAGE_KEY);
     if (stored === 'en' || stored === 'mk') return stored;
-
-    const browser = window.navigator.language.toLowerCase();
-    return browser.startsWith('mk') ? 'mk' : 'en';
+    return 'mk';
   });
 
   useEffect(() => {

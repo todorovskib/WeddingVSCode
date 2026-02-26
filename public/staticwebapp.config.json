@@ -3,6 +3,7 @@
     "rewrite": "/index.html",
     "exclude": [
       "/assets/*",
+      "/audio/*",
       "/api/*",
       "/.auth/*",
       "/favicon.ico",
@@ -14,6 +15,10 @@
       "/*.gif",
       "/*.svg",
       "/*.webp",
+      "/*.wav",
+      "/*.mp3",
+      "/*.ogg",
+      "/*.m4a",
       "/*.json",
       "/*.txt",
       "/*.xml",

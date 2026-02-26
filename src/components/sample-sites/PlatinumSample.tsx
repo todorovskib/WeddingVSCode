@@ -75,6 +75,7 @@ const PlatinumNavTabs: React.FC<{ active: PlatinumPageKey; toPath: (page: Platin
 );
 
 const PlatinumHero: React.FC<{ page: PlatinumPageKey; toPath: (page: PlatinumPageKey) => string }> = ({ page, toPath }) => {
+  const { t } = useI18n();
   const activeMeta = PLATINUM_PAGES.find((p) => p.key === page)!;
 
   return (
@@ -88,26 +89,59 @@ const PlatinumHero: React.FC<{ page: PlatinumPageKey; toPath: (page: PlatinumPag
           <div className="relative mt-3 min-h-[440px] overflow-hidden sm:min-h-[540px]">
             <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1800&q=80" alt="Elena and Marko wedding weekend" onError={onSampleImageError} className="h-full w-full object-cover" />
             <div className="absolute inset-0 bg-gradient-to-b from-[#1d122a]/38 via-[#1d122a]/18 to-[#1d122a]/76" />
-            <div className="absolute inset-0 flex items-center justify-center px-4 py-8">
-              <div className="w-full max-w-3xl text-center text-white">
-                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/75">Wedding Weekend</p>
-                <h1 className="sample-font-romantic mt-3 text-4xl sm:text-5xl lg:text-6xl">Elena & Marko</h1>
-                <p className="mt-4 text-sm font-semibold uppercase tracking-[0.14em] text-white/88 sm:text-base">Saturday, October 3, 2026</p>
-                <p className="mt-2 text-sm text-white/86 sm:text-base">Aurora Estate, Ohrid · Ceremony 16:30 · Reception & Live Band</p>
-                <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-white/84 sm:text-base">
-                  Thank you for celebrating with us. Use the navigation above for events, guest support, seating, gallery, registry, and RSVP.
-                </p>
-                <div className="mt-5 flex flex-wrap items-center justify-center gap-2">
-                  <Link to={toPath('rsvp')} className="sample-btn sample-btn-primary">RSVP</Link>
-                  <Link to={toPath('events')} className="sample-btn sample-btn-secondary">Events</Link>
-                  <Link to={toPath('concierge')} className="sample-btn sample-btn-secondary">Guest Concierge</Link>
+            <div className="absolute inset-0 flex items-end justify-center px-4 py-6 sm:px-6 sm:py-8">
+              <div className="grid w-full max-w-6xl gap-4 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
+                <div className="border border-white/20 bg-black/28 p-4 text-white backdrop-blur-md sm:p-5">
+                  <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/75">Wedding Weekend</p>
+                  <h1 className="sample-font-romantic mt-3 text-4xl sm:text-5xl lg:text-6xl">Elena & Marko</h1>
+                  <p className="mt-4 text-sm font-semibold uppercase tracking-[0.14em] text-white/88 sm:text-base">Saturday, October 3, 2026</p>
+                  <p className="mt-2 text-sm text-white/88 sm:text-base">Aurora Estate, Ohrid · Ceremony 16:30 · Reception & Live Band</p>
+                  <p className="mt-4 max-w-2xl text-sm leading-7 text-white/86 sm:text-base">
+                    Thank you for celebrating with us. Use the navigation above for events, guest support, seating, gallery, registry, and RSVP.
+                  </p>
+                  <div className="mt-5 flex flex-wrap items-center gap-2">
+                    <Link to={toPath('rsvp')} className="sample-btn sample-btn-primary">RSVP</Link>
+                    <Link to={toPath('events')} className="sample-btn sample-btn-secondary">Events</Link>
+                    <Link to={toPath('concierge')} className="sample-btn sample-btn-secondary">Guest Concierge</Link>
+                    <a
+                      href="https://www.google.com/maps/search/?api=1&query=Aurora+Estate+Ohrid"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="sample-btn sample-btn-secondary"
+                    >
+                      {t('Open on map')}
+                    </a>
+                  </div>
+                </div>
+
+                <div className="grid gap-3">
+                  <div className="border border-white/18 bg-black/32 p-4 text-white/95 backdrop-blur-md sm:p-5">
+                    <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/70">Guest Concierge</p>
+                    <p className="mt-2 text-lg font-semibold text-white">Arrival support & private notes</p>
+                    <p className="mt-2 text-sm leading-6 text-white/84">
+                      Platinum guests get event guidance, location support, seating preview, and concierge follow-up in one place.
+                    </p>
+                  </div>
+                  <div className="grid grid-cols-2 gap-3">
+                    {[
+                      ['4', 'Weekend events'],
+                      ['180', 'Guests'],
+                      ['7', 'Guest pages'],
+                      ['12+', 'RSVP details'],
+                    ].map(([value, label]) => (
+                      <div key={label} className="border border-white/16 bg-black/26 p-3 text-white backdrop-blur-sm">
+                        <p className="text-lg font-semibold text-white">{value}</p>
+                        <p className="mt-1 text-xs text-white/80">{label}</p>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
           <div className="mt-3 grid gap-3 lg:grid-cols-[1.02fr_0.98fr]">
-            <div className="border border-violet-200/55 bg-white/72 p-4 sm:p-5" style={{ borderRadius: 10 }}>
+            <div className="border border-violet-200/55 bg-white/80 p-4 sm:p-5" style={{ borderRadius: 8 }}>
               <div className="flex items-center gap-2 text-violet-600">
                 <Sparkles className="h-4 w-4" />
                 <p className="text-xs font-semibold uppercase tracking-[0.18em]">Current page</p>
@@ -118,18 +152,15 @@ const PlatinumHero: React.FC<{ page: PlatinumPageKey; toPath: (page: PlatinumPag
               </p>
             </div>
 
-            <div className="grid grid-cols-2 gap-3">
-              {[
-                ['4', 'Weekend events'],
-                ['180', 'Guests'],
-                ['7', 'Guest pages'],
-                ['12+', 'RSVP details'],
-              ].map(([value, label]) => (
-                <div key={label} className="border border-violet-200/55 bg-white/76 p-4" style={{ borderRadius: 8 }}>
-                  <p className="text-2xl font-semibold text-violet-700">{value}</p>
-                  <p className="mt-1 text-sm text-[#5e4b75]">{label}</p>
-                </div>
-              ))}
+            <div className="border border-violet-200/55 bg-white/78 p-4 sm:p-5" style={{ borderRadius: 8 }}>
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-violet-600/80">Platinum experience</p>
+              <p className="mt-2 text-sm leading-7 text-[#5e4b75]">
+                Multi-page guest website with dedicated concierge, seating preview, events timeline, registry, gallery, and RSVP workflows.
+              </p>
+              <div className="mt-4 flex flex-wrap gap-2">
+                <Link to={toPath('seating')} className="sample-btn sample-btn-secondary !px-3 !py-2 text-xs">Seating page</Link>
+                <Link to={toPath('gallery')} className="sample-btn sample-btn-secondary !px-3 !py-2 text-xs">Gallery page</Link>
+              </div>
             </div>
           </div>
         </motion.div>
@@ -344,6 +375,7 @@ const seatRecords: SeatRecord[] = [
 ];
 
 const PlatinumSeatingPage: React.FC = () => {
+  const { t } = useI18n();
   const [query, setQuery] = useState('');
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -369,7 +401,14 @@ const PlatinumSeatingPage: React.FC = () => {
                   <p className="mt-1 text-xs text-[#5e4b75]">{row.zone} · host: {row.host}</p>
                 </div>
                 <span className="sample-chip">{row.table}</span>
-                <button type="button" className="sample-btn sample-btn-secondary !px-3 !py-2 text-xs">View map</button>
+                <a
+                  href="https://www.google.com/maps/search/?api=1&query=Aurora+Estate+Ohrid"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="sample-btn sample-btn-secondary !px-3 !py-2 text-xs"
+                >
+                  {t('View map')}
+                </a>
               </div>
             ))}
             {filtered.length === 0 && <div className="border border-violet-200/55 bg-white/80 p-4 text-sm text-[#5e4b75]" style={{ borderRadius: 8 }}>No matching guest in this demo list.</div>}

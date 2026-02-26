@@ -39,15 +39,6 @@ export const PricingTiers: React.FC<{ onSelectTier?: (tier: SampleTierMeta) => v
           const selected = selectedTier === tier.id;
           const featured = tier.id === 'plus';
           const previousTier = previousTierFor(tier);
-          const buildOnLabel =
-            tier.id === 'basic'
-              ? 'Basic'
-              : tier.id === 'plus'
-                ? 'Basic +'
-                : tier.id === 'premium'
-                  ? 'Plus +'
-                  : 'Premium +';
-
           return (
             <article
               key={tier.id}
@@ -67,14 +58,6 @@ export const PricingTiers: React.FC<{ onSelectTier?: (tier: SampleTierMeta) => v
                 />
                 <div className={`absolute inset-0 bg-gradient-to-r ${tier.accent} opacity-25`} />
                 <div className="absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-black/50 to-transparent" />
-                <div className="absolute inset-x-0 top-3 flex justify-center">
-                  <span
-                    className="inline-flex items-center border border-white/30 bg-black/45 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-white backdrop-blur"
-                    style={{ borderRadius: 6 }}
-                  >
-                    {t(buildOnLabel)}
-                  </span>
-                </div>
               </div>
 
               {featured && (
